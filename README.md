@@ -1,0 +1,1 @@
+Application serves to preserve useful information within it
