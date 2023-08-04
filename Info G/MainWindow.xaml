@@ -1,0 +1,132 @@
+﻿<Window x:Class="Info_G.MainWindow"
+        xmlns:local="clr-namespace:Info_G"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:custom ="clr-namespace:DropdownTopicControl;assembly=DropdownTopicControl"
+        mc:Ignorable="d"
+        Title="Menu" 
+        Height="600" 
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        
+        Background="Brown"
+        AllowsTransparency="False">
+    <Window.Resources>
+        <local:QuarterConverter x:Key="QuarterConverter"/>
+        <local:ThirdConverter x:Key="ThirdConverter"/>
+        
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="BorderThickness" Value="2"></Setter>
+            <Setter Property="FontFamily" Value="Arial"></Setter>
+            <Setter Property="FontWeight" Value="Heavy"></Setter>
+            <Setter Property="FontSize" Value="21"/>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Margin" Value="20 30 30 30"/>
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="Background" Value="Bisque"></Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border
+        CornerRadius="30"
+        Background="Black">
+        <Grid Margin="0 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition 
+                    Height="150"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <DockPanel  
+            Margin="30 10 30 10">
+                <Button
+                x:Name="AddInfoButton"
+                Click="OnAdd_click"
+                DockPanel.Dock="Left"
+                    Width="350" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="3.169"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    ADD NEW TOPIC
+                </Button>
+                <Label
+                DockPanel.Dock="Right"
+                Height="60" 
+                FontSize="30" 
+                FontStyle="Italic"
+                Foreground="White"
+                HorizontalContentAlignment="Center">
+                    Info Gatherer</Label>
+                
+            </DockPanel>
+            
+            <ScrollViewer
+                Grid.Row="1"
+                Margin="0 0 0 20">
+                <WrapPanel
+                    x:Name="menuPanel"
+                    Grid.Row="1"
+                    Width="1100"
+                    Background="Bisque">
+                </WrapPanel>
+            </ScrollViewer>
+            <Border
+                Visibility="Hidden"
+                x:Name="CreatePanel"
+                Grid.Row="1"
+                Background="Crimson"
+                CornerRadius="30"
+                Width="350"
+                Height="250">
+                <Canvas
+                    Background="Transparent"
+                    Width="350"
+                    Height="250">
+                    <Label
+                    Canvas.Left="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Canvas}}, Converter={StaticResource ThirdConverter}}"
+                    Margin ="0 20"
+                    FontSize="22"
+                    FontWeight="Heavy">
+                        Topic of the note:
+                    </Label>
+                    <TextBox
+                    x:Name="noteName"
+                    Canvas.Left="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Canvas}}, Converter={StaticResource QuarterConverter}}"
+                    Canvas.Top="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Canvas}}, Converter={StaticResource QuarterConverter}}"
+                    Width="200"
+                    Height="40"
+                    FontSize="20">
+                    </TextBox>
+                    <Button Canvas.Left="10"
+                            Canvas.Bottom="0"
+                            Width="100"
+                            Click="Back_to_menu">
+                        Back
+                    </Button>
+                    <Button
+                    Canvas.Right="10"
+                    Canvas.Bottom="0"
+                    Width="100"
+                    Click="OnCreate_click" RenderTransformOrigin="0.5,0.5">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-4.769"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        Create
+                    </Button>
+                </Canvas>
+            </Border>
+        </Grid>
+
+    </Border>
+</Window>

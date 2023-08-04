@@ -1,0 +1,88 @@
+D:\staff\Info G\Info G\bin\Debug\net6.0-windows\Info G.exe
+D:\staff\Info G\Info G\bin\Debug\net6.0-windows\Info G.deps.json
+D:\staff\Info G\Info G\bin\Debug\net6.0-windows\Info G.runtimeconfig.json
+D:\staff\Info G\Info G\bin\Debug\net6.0-windows\Info G.dll
+D:\staff\Info G\Info G\bin\Debug\net6.0-windows\Info G.pdb
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.AssemblyReference.cache
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\App.g.cs
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G_MarkupCompile.cache
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G_MarkupCompile.lref
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\MainWindow.baml
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.g.resources
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.GeneratedMSBuildEditorConfig.editorconfig
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.AssemblyInfoInputs.cache
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.AssemblyInfo.cs
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.CoreCompileInputs.cache
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.dll
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\refint\Info G.dll
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.pdb
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\Info G.genruntimeconfig.cache
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\ref\Info G.dll
+D:\staff\Info G\Info G\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.AssemblyReference.cache
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\App.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G_MarkupCompile.cache
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G_MarkupCompile.lref
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\MainWindow.baml
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.dll
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\refint\Info G.dll
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.pdb
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.exe
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.deps.json
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.runtimeconfig.json
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.pdb
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Themes\Generic.baml
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.g.resources
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.AssemblyInfoInputs.cache
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.AssemblyInfo.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.CoreCompileInputs.cache
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.genruntimeconfig.cache
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\ref\Info G.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\EntityFramework.SqlServer.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\EntityFramework.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.CopyComplete
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.exe
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.deps.json
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.runtimeconfig.json
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\Info G.pdb
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\EntityFramework.SqlServer.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\EntityFramework.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.AssemblyReference.cache
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G_MarkupCompile.cache
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G_MarkupCompile.lref
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Themes\Generic.baml
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.g.resources
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.AssemblyInfoInputs.cache
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.AssemblyInfo.cs
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.csproj.CopyComplete
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\refint\Info G.dll
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.pdb
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\Info G.genruntimeconfig.cache
+C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\ref\Info G.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\DropdownTopicControl.dll
+C:\projects\Info G\Info G\bin\Debug\net6.0-windows\DropdownTopicControl.pdb

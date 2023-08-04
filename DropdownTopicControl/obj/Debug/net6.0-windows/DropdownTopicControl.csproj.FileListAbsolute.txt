@@ -1,0 +1,17 @@
+C:\projects\Info G\DropdownTopicControl\bin\Debug\net6.0-windows\DropdownTopicControl.deps.json
+C:\projects\Info G\DropdownTopicControl\bin\Debug\net6.0-windows\DropdownTopicControl.dll
+C:\projects\Info G\DropdownTopicControl\bin\Debug\net6.0-windows\DropdownTopicControl.pdb
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.csproj.AssemblyReference.cache
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl_MarkupCompile.cache
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl_MarkupCompile.lref
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\Themes\Generic.baml
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.g.resources
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.AssemblyInfoInputs.cache
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.AssemblyInfo.cs
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.csproj.CoreCompileInputs.cache
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.dll
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\refint\DropdownTopicControl.dll
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\DropdownTopicControl.pdb
+C:\projects\Info G\DropdownTopicControl\obj\Debug\net6.0-windows\ref\DropdownTopicControl.dll
