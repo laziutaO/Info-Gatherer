@@ -25,7 +25,7 @@ namespace Info_G
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string oldNameTopic = String.Empty; 
+        private string oldNameTopic = "da"; 
         public MainWindow()
         {
             InitializeComponent();
@@ -47,20 +47,22 @@ namespace Info_G
 
         private void OnRename_click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("edit button opened!");
-            Border renamePanel = new();
-            renamePanel.Visibility = Visibility.Visible;
 
-            Canvas renameCanvas = new();
-            renameCanvas.Background = new SolidColorBrush(Colors.Bisque);
-            renamePanel.Child = renameCanvas;
-
-            Label renameLabel = new();
-            renameLabel.Content = "NEW NAME:";
-            renameCanvas.Children.Add(renameLabel);
-
-            TextBox renameTextBox = new();
+            MessageBox.Show($"edit button {oldNameTopic}");
             
+        }
+        private void CanvasMouseEnter(object sender, MouseEventArgs e)
+        {
+            if (sender is Canvas canvas)
+            {
+                foreach (UIElement element in canvas.Children)
+                {
+                    if (element is Button button)
+                    {
+                        oldNameTopic = (string)button.Content;
+                    }
+                }
+            }
         }
 
         private void CreateButton()
@@ -70,6 +72,7 @@ namespace Info_G
             DbExecution.ExecuteQuery(_add_topic_query);
             DisplayTopics();
         }
+
 
         private void DisplayTopics()
         {
@@ -82,6 +85,7 @@ namespace Info_G
                     button_canvas.Height = 170;
                     button_canvas.Width = 220;
                     button_canvas.Background = new SolidColorBrush(Colors.Transparent);
+                    button_canvas.MouseEnter += CanvasMouseEnter;
                     menuPanel.Children.Add(button_canvas);
 
                     Button butt = new();
@@ -108,8 +112,7 @@ namespace Info_G
             }
         }
 
-       
-        
+
 
         private void SetEditButton(ref DropdownTopic dropdown, string curNameTopic)
         {
