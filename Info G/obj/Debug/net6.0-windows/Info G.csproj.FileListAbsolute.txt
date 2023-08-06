@@ -86,3 +86,5 @@ C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\
 C:\Users\User\OneDrive\Рабочий стол\projects\Info G\Info G\obj\Debug\net6.0-windows\ref\Info G.dll
 C:\projects\Info G\Info G\bin\Debug\net6.0-windows\DropdownTopicControl.dll
 C:\projects\Info G\Info G\bin\Debug\net6.0-windows\DropdownTopicControl.pdb
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\RenameWindow.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\RenameWindow.baml

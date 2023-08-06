@@ -17,8 +17,6 @@ namespace Info_G
 
         static SqlConnection? cnn;
 
-        public static string add_topic = "INSERT INTO Topic VALUES('Python', Null)";
-
         public static string read_names = "SELECT Name FROM Topic";
 
         static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=info_g_db;Integrated Security=True;";
@@ -29,7 +27,6 @@ namespace Info_G
             {
                 //openning connection
                 cnn.Open();
-                MessageBox.Show("Connection is open!");
                 //applying query to the table
                 SqlCommand cmd = new SqlCommand(query, cnn);
                 SqlDataAdapter adapter = new SqlDataAdapter();
@@ -39,7 +36,6 @@ namespace Info_G
                 cmd.Dispose();
                 cnn.Close();
 
-                MessageBox.Show("Connection is closed!");
             }
             catch (Exception ex)
             {
@@ -52,7 +48,7 @@ namespace Info_G
             cnn = new SqlConnection(connectionString);
             //openning connection
             cnn.Open();
-            MessageBox.Show("Connection is open!");
+
             //applying query to the table
             SqlCommand cmd = new SqlCommand(query, cnn);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -64,8 +60,6 @@ namespace Info_G
             reader.Close();
             cmd.Dispose();
             cnn.Close();
-
-            MessageBox.Show("Connection is closed!");
 
         }
 

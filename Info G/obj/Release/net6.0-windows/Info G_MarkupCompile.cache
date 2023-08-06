@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 C:\projects\Info G\Info G\App.xaml
-21611351110
+3653596699
 
-71401854081
+8-974458232
 19856509819
-MainWindow.xaml;Themes\Generic.xaml;
+MainWindow.xaml;RenameWindow.xaml;Themes\Generic.xaml;
 
 True
 

@@ -11,8 +11,9 @@
         Width="1200"
         WindowStartupLocation="CenterScreen"
         
-        Background="Brown"
+        Background="Transparent"
         AllowsTransparency="False">
+
     <Window.Resources>
         <local:QuarterConverter x:Key="QuarterConverter"/>
         <local:ThirdConverter x:Key="ThirdConverter"/>

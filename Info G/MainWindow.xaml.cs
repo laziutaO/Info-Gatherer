@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DropdownTopicControl;
 
+
 namespace Info_G
 {
     /// <summary>
@@ -25,7 +26,9 @@ namespace Info_G
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string oldNameTopic = "da"; 
+        public string oldNameTopic = String.Empty; 
+
+        private RenameWindow renameWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -47,9 +50,8 @@ namespace Info_G
 
         private void OnRename_click(object sender, RoutedEventArgs e)
         {
-
-            MessageBox.Show($"edit button {oldNameTopic}");
-            
+            renameWindow = new RenameWindow(this);
+            renameWindow.Show();
         }
         private void CanvasMouseEnter(object sender, MouseEventArgs e)
         {
@@ -68,13 +70,13 @@ namespace Info_G
         private void CreateButton()
         {
             string content = noteName.Text;
-            string _add_topic_query = $"INSERT INTO Topic VALUES('{content}', Null)";
+            string _add_topic_query = $"INSERT INTO Topic VALUES('{content}', Null);";
             DbExecution.ExecuteQuery(_add_topic_query);
             DisplayTopics();
         }
 
 
-        private void DisplayTopics()
+        public void DisplayTopics()
         {
             menuPanel.Children.Clear();
             try
