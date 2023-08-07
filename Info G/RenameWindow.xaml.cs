@@ -20,8 +20,8 @@ namespace Info_G
     /// </summary>
     public partial class RenameWindow : Window
     {
-        MainWindow mainWindow;
-        public RenameWindow(MainWindow _mainWindow)
+        MenuPage mainWindow;
+        public RenameWindow(MenuPage _mainWindow)
         {
             InitializeComponent();
             mainWindow = _mainWindow;

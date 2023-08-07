@@ -19,8 +19,8 @@ namespace Info_G
     /// </summary>
     public partial class DeleteWindow : Window
     {
-        MainWindow mainWindow;
-        public DeleteWindow(MainWindow _mainWindow)
+        MenuPage mainWindow;
+        public DeleteWindow(MenuPage _mainWindow)
         {
             InitializeComponent();
             mainWindow = _mainWindow;

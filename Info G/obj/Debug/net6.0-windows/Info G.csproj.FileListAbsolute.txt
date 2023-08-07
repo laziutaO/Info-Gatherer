@@ -90,3 +90,7 @@ C:\projects\Info G\Info G\obj\Debug\net6.0-windows\RenameWindow.g.cs
 C:\projects\Info G\Info G\obj\Debug\net6.0-windows\RenameWindow.baml
 C:\projects\Info G\Info G\obj\Debug\net6.0-windows\DeleteWindow.g.cs
 C:\projects\Info G\Info G\obj\Debug\net6.0-windows\DeleteWindow.baml
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\InformationPage.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\InformationPage.baml
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\MenuPage.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\MenuPage.baml

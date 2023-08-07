@@ -10,6 +10,12 @@
     <Compile Update="DeleteWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="InformationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MenuPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="RenameWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -18,7 +24,13 @@
     <Page Update="DeleteWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="InformationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MenuPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="RenameWindow.xaml">
