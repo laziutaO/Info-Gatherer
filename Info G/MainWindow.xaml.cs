@@ -29,6 +29,8 @@ namespace Info_G
         public string oldNameTopic = String.Empty; 
 
         private RenameWindow renameWindow;
+
+        private DeleteWindow deleteWindow;
         public MainWindow()
         {
             InitializeComponent();
@@ -52,6 +54,12 @@ namespace Info_G
         {
             renameWindow = new RenameWindow(this);
             renameWindow.Show();
+        }
+
+        private void OnDelete_click(object sender, RoutedEventArgs e)
+        {
+            deleteWindow = new DeleteWindow(this);
+            deleteWindow.Show();
         }
         private void CanvasMouseEnter(object sender, MouseEventArgs e)
         {
@@ -133,6 +141,7 @@ namespace Info_G
             deleteButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
             deleteButton.Margin = new Thickness(5, 0, 5, 5);
             deleteButton.FontWeight = FontWeights.Light;
+            deleteButton.Click += OnDelete_click;
 
             stackpanel.Children.Add(renameButton);
             stackpanel.Children.Add(deleteButton);

@@ -88,3 +88,5 @@ C:\projects\Info G\Info G\bin\Debug\net6.0-windows\DropdownTopicControl.dll
 C:\projects\Info G\Info G\bin\Debug\net6.0-windows\DropdownTopicControl.pdb
 C:\projects\Info G\Info G\obj\Debug\net6.0-windows\RenameWindow.g.cs
 C:\projects\Info G\Info G\obj\Debug\net6.0-windows\RenameWindow.baml
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\DeleteWindow.g.cs
+C:\projects\Info G\Info G\obj\Debug\net6.0-windows\DeleteWindow.baml
