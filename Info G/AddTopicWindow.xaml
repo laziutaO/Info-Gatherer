@@ -1,0 +1,72 @@
+﻿<Window x:Class="Info_G.AddTopicWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Info_G"
+        mc:Ignorable="d"
+        Title="" Height="250" Width="300"
+        WindowStartupLocation="CenterOwner"
+        Background="Bisque"
+        ResizeMode="NoResize">
+    <Grid>
+        <Border
+            x:Name="CreatePanel"
+            Background="Bisque"
+            CornerRadius="30">
+            <Canvas
+                Background="Transparent" Margin="0,10,0,0">
+                <Label
+                    FontSize="22"
+                    FontWeight="Heavy" 
+                    Canvas.Top="10" 
+                    Canvas.Left="50">
+                    Topic of the note:
+                </Label>
+                <TextBox
+                    x:Name="noteName"
+                    Width="200"
+                    Height="40"
+                    FontSize="20" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Canvas.Left="50" 
+                    Canvas.Top="72"
+                    MaxLength="{Binding topic_length}">
+                </TextBox>
+                <Button 
+                    Canvas.Right="10"
+                    Canvas.Bottom="0"
+                    Background="Crimson"
+                    Width="115"
+                    FontWeight="Heavy"
+                    FontSize="20" 
+                    Click="Back_to_menu" 
+                    HorizontalAlignment="Center" 
+                    Canvas.Left="150" Canvas.Top="140" 
+                    VerticalAlignment="Top" 
+                    Height="48" RenderTransformOrigin="0.512,0.555">
+                    Back
+                </Button>
+                <Button
+                    Canvas.Left="13"
+                    Canvas.Bottom="0"
+                    Background="Crimson"
+                    Width="115"
+                    FontWeight="Heavy"
+                    FontSize="20" 
+                    Click="OnCreate_click" RenderTransformOrigin="0.547,-0.236" Canvas.Top="139" Height="42" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-4.769"/>
+                            <TranslateTransform X="-2.592" Y="-0.341"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    Create
+                </Button>
+            </Canvas>
+        </Border>
+    </Grid>
+</Window>

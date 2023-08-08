@@ -50,6 +50,7 @@
             FontWeight="Bold" 
             FontSize="20" 
             Background="Crimson" 
+            BorderBrush="Black"
             Click="OnSave_Rename_click">SAVE
         </Button>
         <Button 
@@ -59,7 +60,8 @@
             Height="60" 
             FontWeight="Bold" 
             FontSize="20" 
-            Background="Crimson" 
+            Background="Crimson"
+            BorderBrush="Black"
             Click="OnBack_Window_click">BACK
         </Button>
     </Grid>

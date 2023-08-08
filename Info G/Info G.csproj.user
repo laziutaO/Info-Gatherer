@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AddTopicWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="DeleteWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -21,6 +24,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AddTopicWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="DeleteWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

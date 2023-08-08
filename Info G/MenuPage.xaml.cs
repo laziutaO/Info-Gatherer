@@ -28,23 +28,19 @@ namespace Info_G
 
         private DeleteWindow deleteWindow;
 
+        private AddTopicWindow addTopicWindow;
+
         public MenuPage()
         {
             InitializeComponent();
             DisplayTopics();
         }
 
-        private void OnCreate_click(object sender, RoutedEventArgs e)
-        {
-            CreatePanel.Visibility = Visibility.Hidden;
-            CreateButton();
-            noteName.Text = String.Empty;
-        }
 
         private void OnAdd_click(object sender, RoutedEventArgs e)
         {
-            CreatePanel.Visibility = Visibility.Visible;
-            noteName.MaxLength = 26;
+            addTopicWindow = new AddTopicWindow(this);
+            addTopicWindow.Show();
         }
 
         private void OnRename_click(object sender, RoutedEventArgs e)
@@ -75,14 +71,6 @@ namespace Info_G
         private void Topic_open_click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new InformationPage());
-        }
-
-        private void CreateButton()
-        {
-            string content = noteName.Text;
-            string _add_topic_query = $"INSERT INTO Topic VALUES('{content}', Null);";
-            DbExecution.ExecuteQuery(_add_topic_query);
-            DisplayTopics();
         }
 
 
@@ -165,10 +153,7 @@ namespace Info_G
             else
                 butt.FontSize = 24;
         }
-        private void Back_to_menu(object sender, RoutedEventArgs e)
-        {
-            CreatePanel.Visibility = Visibility.Hidden;
-        }
+
     }
 }
 

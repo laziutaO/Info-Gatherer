@@ -70,56 +70,7 @@
                     Background="Bisque">
                 </WrapPanel>
             </ScrollViewer>
-            <Border
-                Visibility="Hidden"
-                x:Name="CreatePanel"
-                Grid.Row="1"
-                Background="Crimson"
-                CornerRadius="30"
-                Width="350"
-                Height="250">
-                <Canvas
-                    Background="Transparent"
-                    Width="350"
-                    Height="250">
-                    <Label
-                    Canvas.Left="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Canvas}}, Converter={StaticResource ThirdConverter}}"
-                    Margin ="0 20"
-                    FontSize="22"
-                    FontWeight="Heavy">
-                        Topic of the note:
-                    </Label>
-                    <TextBox
-                    x:Name="noteName"
-                    Canvas.Left="{Binding Path=ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Canvas}}, Converter={StaticResource QuarterConverter}}"
-                    Canvas.Top="{Binding Path=ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Canvas}}, Converter={StaticResource QuarterConverter}}"
-                    Width="200"
-                    Height="40"
-                    FontSize="20">
-                    </TextBox>
-                    <Button Canvas.Left="10"
-                            Canvas.Bottom="0"
-                            Width="100"
-                            Click="Back_to_menu">
-                        Back
-                    </Button>
-                    <Button
-                    Canvas.Right="10"
-                    Canvas.Bottom="0"
-                    Width="100"
-                    Click="OnCreate_click" RenderTransformOrigin="0.5,0.5">
-                        <Button.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform Angle="-4.769"/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Button.RenderTransform>
-                        Create
-                    </Button>
-                </Canvas>
-            </Border>
+            
             
         </Grid>
 
