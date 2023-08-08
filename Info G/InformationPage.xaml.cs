@@ -30,5 +30,15 @@ namespace Info_G
         {
             NavigationService.Navigate(new MenuPage());
         }
+
+        private void OnAddPhoto_click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnAddText_click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

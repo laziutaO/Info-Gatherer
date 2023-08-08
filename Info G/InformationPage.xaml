@@ -9,6 +9,64 @@
       Title="InformationPage">
 
     <Grid Background="Bisque">
-        <Button Background="Crimson" Width="120" Height="80" Click="Back_to_menu_click">Back to menu</Button>
+        <Grid.RowDefinitions>
+            <RowDefinition 
+                    Height="120"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DockPanel
+            Background="Black"
+            Margin="0,0,0,10">
+            <Button
+                Margin="50 0 0 0"
+                x:Name="AddPhotoButton"
+                FontWeight="Bold" 
+                FontSize="20" 
+                Background="Bisque" 
+                BorderBrush="Black"
+                Height="80"
+                Width="200"
+                DockPanel.Dock="Left"
+                Click="OnAddPhoto_click"
+                RenderTransformOrigin="0.5,0.5">
+                Add Photo
+            </Button>
+            <Button
+                Margin="50 0 0 0"
+                FontWeight="Bold" 
+                FontSize="20" 
+                Background="Bisque" 
+                BorderBrush="Black"
+                x:Name="AddInfoButton"
+                Height="80"
+                Width="200"
+                DockPanel.Dock="Left"
+                Click="OnAddText_click"
+                RenderTransformOrigin="0.5,0.5">
+                Add Text
+            </Button>
+            <Button
+                Margin="250 0 0 0"
+                FontWeight="Bold" 
+                FontSize="20" 
+                Background="Bisque" 
+                BorderBrush="Black"
+                Height="80"
+                Width="200" 
+                DockPanel.Dock="Right"
+                Click="Back_to_menu_click">
+                Back to menu
+            </Button>
+        </DockPanel>
+        <ScrollViewer
+                Grid.Row="1"
+                Margin="0 0 0 20">
+            <WrapPanel
+                    x:Name="menuPanel"
+                    Grid.Row="1"
+                    Width="1100"
+                    Background="Bisque">
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
