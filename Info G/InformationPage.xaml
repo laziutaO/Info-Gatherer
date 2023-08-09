@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Info_G"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1200"
-      Title="InformationPage">
+      Title="InformationPage"
+      PreviewKeyDown="InformationPage_PreviewKeyDown">
 
     <Grid Background="Bisque">
         <Grid.RowDefinitions>
@@ -62,7 +63,7 @@
                 Grid.Row="1"
                 Margin="0 0 0 20">
             <WrapPanel
-                    x:Name="menuPanel"
+                    x:Name="infoPanel"
                     Grid.Row="1"
                     Width="1100"
                     Background="Bisque">
