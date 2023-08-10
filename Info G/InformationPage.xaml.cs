@@ -46,12 +46,15 @@ namespace Info_G
             grid = new();
             grid.Width = 1100;
             grid.Height = 500;
+            grid.Margin = new Thickness(0, 50, 0, 0);
 
             RowDefinition rowDef1 = new RowDefinition();
             rowDef1.Height = new GridLength(400); // Set the height to 120
 
             RowDefinition rowDef2 = new RowDefinition();
-            // By not setting the Height property of the second row definition, it will take the remaining available space
+            rowDef2.Height = new GridLength (50);
+
+            RowDefinition rowDef3 = new RowDefinition();
 
             ColumnDefinition columnDef1 = new ColumnDefinition();
             columnDef1.Width = new GridLength(800);
@@ -60,6 +63,7 @@ namespace Info_G
 
             grid.RowDefinitions.Add(rowDef1);
             grid.RowDefinitions.Add(rowDef2);
+            grid.RowDefinitions.Add (rowDef3);
 
             grid.ColumnDefinitions.Add(columnDef1);
             grid.ColumnDefinitions.Add(columnDef2);
@@ -71,9 +75,66 @@ namespace Info_G
             infoPanel.Children.Add(grid);
         }
 
+        private void AddCaption_click(object sender, RoutedEventArgs e)
+        {
+            RichTextBox captionBox = new RichTextBox();
+            captionBox.FontSize = 14;
+            grid.Children.Add(captionBox);
+            grid.Margin = new Thickness(0, 50, 0, 0);
+
+            Grid.SetRow(captionBox, 2);
+            Grid.SetColumn(captionBox, 0);
+        }
+
         private void OnAddText_click(object sender, RoutedEventArgs e)
         {
+            //defining grid and textbox
+            grid = new();
+            grid.Width = 1100;
+            grid.Height = 500;
+            grid.Background = new SolidColorBrush(Colors.Beige);
+            grid.Margin = new Thickness(0, 50,0,0);
 
+            ColumnDefinition columnDef1 = new ColumnDefinition();
+            columnDef1.Width = new GridLength(800);
+
+            ColumnDefinition columnDef2 = new ColumnDefinition();
+
+            grid.ColumnDefinitions.Add(columnDef1);
+            grid.ColumnDefinitions.Add(columnDef2);
+            infoPanel.Children.Add(grid);
+
+            RichTextBox textBox = new RichTextBox();
+            textBox.FontSize = 14;
+            grid.Children.Add(textBox);
+            Grid.SetColumn(textBox, 0);
+
+            Button save = new Button();
+            save.Width = 120;
+            save.Height = 50;
+            save.Content = "Save";
+            save.Background = new SolidColorBrush(Colors.Crimson);
+            //adding buttons
+            Button delete_text = new Button();
+            delete_text.Width = 120;
+            delete_text.Height = 50;
+            delete_text.Content = "Delete";
+            delete_text.Background = new SolidColorBrush(Colors.Crimson);
+            delete_text.Click += Delete_text_click;
+
+            grid.Children.Add(save);
+            grid.Children.Add(delete_text);
+            
+            Grid.SetColumn(save, 1);
+            Grid.SetColumn(delete_text, 1);
+
+            save.Margin = new Thickness(50, 0, 0, 150);
+            delete_text.Margin = new Thickness(50, 0, 0, 0);
+        }
+
+        private void Delete_text_click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void InformationPage_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -104,6 +165,7 @@ namespace Info_G
             add_caption.Height = 50;
             add_caption.Content = "Add Caption";
             add_caption.Background = new SolidColorBrush(Colors.Crimson);
+            add_caption.Click += AddCaption_click;
 
             Button save = new Button();
             save.Width = 120;
@@ -127,6 +189,7 @@ namespace Info_G
             Grid.SetColumn(add_caption, 1);
             Grid.SetColumn(save, 1);
             Grid.SetColumn(remove_image, 1);
+
             add_caption.Margin = new Thickness(50, 0, 0, 300);
             save.Margin = new Thickness(50, 0, 0, 150);
             remove_image.Margin = new Thickness(50, 0, 0, 0);
