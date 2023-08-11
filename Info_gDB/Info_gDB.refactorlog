@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="a9d98505-5750-454f-813d-b67f5a71e9fa" ChangeDateTime="08/11/2023 15:50:11">
+    <Property Name="ElementName" Value="[dbo].[Image].[Value]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Image]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Text_Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="69114827-ef4c-43be-98ba-61b7dd640a4e" ChangeDateTime="08/11/2023 15:51:07">
+    <Property Name="ElementName" Value="[dbo].[Information].[Text]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Information]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Text_Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6f8b2e4e-08bd-4119-96f3-5b2e95f9768a" ChangeDateTime="08/11/2023 15:51:11">
+    <Property Name="ElementName" Value="[dbo].[Information].[Image]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Information]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Image_Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7e0b6fd9-ac73-40ca-8a85-d1240924b6c2" ChangeDateTime="08/11/2023 18:31:20">
+    <Property Name="ElementName" Value="[dbo].[Information].[Text_Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Information]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Text" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1a162445-ed52-426d-b77b-ac5ab1bcdbfe" ChangeDateTime="08/11/2023 18:31:27">
+    <Property Name="ElementName" Value="[dbo].[Information].[Image_Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Information]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Image" />
+  </Operation>
+</Operations>

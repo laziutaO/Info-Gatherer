@@ -22,6 +22,7 @@ namespace Info_G
     /// </summary>
     public partial class InformationPage : Page
     {
+
         Image imageControl { get; set; }    
 
         Grid grid { get; set; }
