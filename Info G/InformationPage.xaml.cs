@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DropdownTopicControl;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -33,6 +34,7 @@ namespace Info_G
         public InformationPage()
         {
             InitializeComponent();
+            DisplayText();
         }
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -52,6 +54,49 @@ namespace Info_G
                         //
                     }
                 }
+            }
+        }
+
+        public void DisplayText()
+        {
+            try
+            {
+                foreach (string text in DbExecution.ReadRows(DbExecution.read_text))
+                {
+                    grid = new();
+                    grid.Width = 1100;
+                    grid.Background = new SolidColorBrush(Colors.Beige);
+                    grid.Margin = new Thickness(0, 50, 0, 0);
+                    grid.MouseEnter += Grid_MouseEnter;
+
+                    ColumnDefinition columnDef1 = new ColumnDefinition();
+                    columnDef1.Width = new GridLength(800);
+
+                    ColumnDefinition columnDef2 = new ColumnDefinition();
+
+                    grid.ColumnDefinitions.Add(columnDef1);
+                    grid.ColumnDefinitions.Add(columnDef2);
+                    infoPanel.Children.Add(grid);
+
+                    TextBlock textBlock = new();
+                    textBlock.Width = 800;
+                    textBlock.Text = text;
+                    grid.Children.Add(textBlock);
+                    Grid.SetColumn(textBlock, 0);
+                   
+
+                    DropdownTopic dropdownTopic = new DropdownTopic();
+                    dropdownTopic.Height = 20;
+                    dropdownTopic.Width = 14;
+                    grid.Children.Add(dropdownTopic);
+                    Grid.SetColumn(dropdownTopic, 1);
+                    dropdownTopic.Margin = new Thickness(0, 0, 0, 0);
+                    //SetEditButton(ref dropdownTopic, name);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred: " + ex.Message);
             }
         }
         private void Back_to_menu_click(object sender, RoutedEventArgs e)
@@ -113,10 +158,10 @@ namespace Info_G
         private void Save_text_click(object sender, RoutedEventArgs e)
         {
             string active_text = new TextRange(activeTextBox.Document.ContentStart, activeTextBox.Document.ContentEnd).Text;
-            MessageBox.Show(active_text);
-            string _save_text_query = $"INSERT INTO Information VALUES('{activeTextBox}', NULL, {topicId});";
+            string _save_text_query = $"INSERT INTO Information VALUES('{active_text}', NULL, {topicId});";
             DbExecution.ExecuteQuery(_save_text_query);
         }
+
 
         private void OnAddText_click(object sender, RoutedEventArgs e)
         {

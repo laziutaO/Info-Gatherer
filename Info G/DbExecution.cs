@@ -19,6 +19,8 @@ namespace Info_G
 
         public static string read_names = "SELECT Name FROM Topic";
 
+        public static string read_text = "SELECT Text FROM Information WHERE Text IS NOT NULL;";
+
         static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=info_g_db;Integrated Security=True;";
         public static void ExecuteQuery(string query)
         {
