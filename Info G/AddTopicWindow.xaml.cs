@@ -36,17 +36,16 @@ namespace Info_G
 
         private void OnCreate_click(object sender, RoutedEventArgs e)
         {
-            noteName.Text = String.Empty;
             CreateButton();
-            
         }
 
         private void CreateButton()
         {
             string content = noteName.Text;
-            string _add_topic_query = $"INSERT INTO Topic VALUES('{content}', Null);";
+            string _add_topic_query = $"INSERT INTO Topic VALUES('{content}');";
             DbExecution.ExecuteQuery(_add_topic_query);
             menuPage.DisplayTopics();
+            noteName.Text = String.Empty;
             this.Close();
         }
     }

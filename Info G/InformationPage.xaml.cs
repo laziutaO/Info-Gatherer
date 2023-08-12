@@ -22,15 +22,38 @@ namespace Info_G
     /// </summary>
     public partial class InformationPage : Page
     {
+        private RichTextBox activeTextBox { get; set; }
 
-        Image imageControl { get; set; }    
+        public int topicId { get; set; }
+
+        private Image activeImage { get; set; }
+        private Image imageControl { get; set; }    
 
         Grid grid { get; set; }
         public InformationPage()
         {
             InitializeComponent();
         }
+        private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (sender is Grid grid)
+            {
+                foreach (UIElement element in grid.Children)
+                {
+                    if (element is RichTextBox textBox)
+                    {
+                        activeTextBox = textBox;
+                        
+                        
+                    }
 
+                    else if (element is Image image) 
+                    { 
+                        //
+                    }
+                }
+            }
+        }
         private void Back_to_menu_click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MenuPage());
@@ -87,6 +110,14 @@ namespace Info_G
             Grid.SetColumn(captionBox, 0);
         }
 
+        private void Save_text_click(object sender, RoutedEventArgs e)
+        {
+            string active_text = new TextRange(activeTextBox.Document.ContentStart, activeTextBox.Document.ContentEnd).Text;
+            MessageBox.Show(active_text);
+            string _save_text_query = $"INSERT INTO Information VALUES('{activeTextBox}', NULL, {topicId});";
+            DbExecution.ExecuteQuery(_save_text_query);
+        }
+
         private void OnAddText_click(object sender, RoutedEventArgs e)
         {
             //defining grid and textbox
@@ -95,6 +126,7 @@ namespace Info_G
             grid.Height = 500;
             grid.Background = new SolidColorBrush(Colors.Beige);
             grid.Margin = new Thickness(0, 50,0,0);
+            grid.MouseEnter += Grid_MouseEnter;
 
             ColumnDefinition columnDef1 = new ColumnDefinition();
             columnDef1.Width = new GridLength(800);
@@ -115,6 +147,7 @@ namespace Info_G
             save.Height = 50;
             save.Content = "Save";
             save.Background = new SolidColorBrush(Colors.Crimson);
+            save.Click += Save_text_click;
             //adding buttons
             Button delete_text = new Button();
             delete_text.Width = 120;

@@ -70,10 +70,16 @@ namespace Info_G
 
         private void Topic_open_click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new InformationPage());
+            InformationPage informationPage = new InformationPage();
+            informationPage.topicId = Get_TopicId();
+            NavigationService.Navigate(informationPage);
         }
 
-
+        private int Get_TopicId()
+        {
+            string _get_topic_id = $"SELECT Id FROM Topic WHERE Name = '{oldNameTopic}'";
+            return (int)DbExecution.ExecuteReturnQuery(_get_topic_id) ;
+        }
         public void DisplayTopics()
         {
             menuPanel.Children.Clear();

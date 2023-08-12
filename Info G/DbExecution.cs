@@ -32,6 +32,7 @@ namespace Info_G
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.InsertCommand = cmd;
                 adapter.InsertCommand.ExecuteNonQuery();
+                
                 //closing connection
                 cmd.Dispose();
                 cnn.Close();
@@ -41,6 +42,33 @@ namespace Info_G
             {
                 MessageBox.Show("Error occurred: " + ex.Message);
             }
+        }
+
+        public static object ExecuteReturnQuery(string query)
+        {
+            cnn = new SqlConnection(connectionString);
+
+            object result = null;
+
+            try
+            {
+                //openning connection
+                cnn.Open();
+                //applying query to the table
+                SqlCommand cmd = new SqlCommand(query, cnn);
+                result = cmd.ExecuteScalar();
+
+                //closing connection
+                cmd.Dispose();
+                cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred: " + ex.Message);
+            }
+
+            return result;
         }
 
         public static IEnumerable<string> ReadRows(string query) 
