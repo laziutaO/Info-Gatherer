@@ -25,12 +25,20 @@ namespace Info_G
     {
         private RichTextBox activeTextBox { get; set; }
 
+        private TextBlock activeTextBlock { get; set; }
+
         public int topicId { get; set; }
 
+        private string textToChange { get; set; } = string.Empty;
+
         private Image activeImage { get; set; }
-        private Image imageControl { get; set; }    
+        private Image imageControl { get; set; }   
+        
+        private DropdownTopic activeDropdown { get; set; }
 
         Grid grid { get; set; }
+
+        Grid activeGrid { get; set; }
         public InformationPage()
         {
             InitializeComponent();
@@ -40,13 +48,18 @@ namespace Info_G
         {
             if (sender is Grid grid)
             {
+                this.grid = grid;
+                activeGrid = grid;
                 foreach (UIElement element in grid.Children)
                 {
                     if (element is RichTextBox textBox)
                     {
                         activeTextBox = textBox;
                         
-                        
+                    }
+                    else if (element is TextBlock textBlock)
+                    {
+                        activeTextBlock = textBlock;
                     }
 
                     else if (element is Image image) 
@@ -86,12 +99,14 @@ namespace Info_G
                    
 
                     DropdownTopic dropdownTopic = new DropdownTopic();
+                    
                     dropdownTopic.Height = 20;
                     dropdownTopic.Width = 14;
+                    dropdownTopic.VerticalAlignment = VerticalAlignment.Top;
                     grid.Children.Add(dropdownTopic);
                     Grid.SetColumn(dropdownTopic, 1);
                     dropdownTopic.Margin = new Thickness(0, 0, 0, 0);
-                    //SetEditButton(ref dropdownTopic, name);
+                    SetEditButton(ref dropdownTopic, text);
                 }
             }
             catch (Exception ex)
@@ -99,7 +114,88 @@ namespace Info_G
                 MessageBox.Show("Error occurred: " + ex.Message);
             }
         }
-        private void Back_to_menu_click(object sender, RoutedEventArgs e)
+        private void SetEditButton(ref DropdownTopic dropdown, string curNameTopic)
+        {
+            
+            StackPanel stackpanel = new();
+
+            Button editButton = new Button();
+            editButton.Content = "Edit text";
+            editButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            editButton.Margin = new Thickness(5, 5, 5, 5);
+            editButton.FontWeight = FontWeights.Light;
+            editButton.Width = 150;
+            editButton.Click += OnEdit_click;
+
+            Button deleteButton = new Button();
+            deleteButton.Content = "Delete";
+            deleteButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            deleteButton.Margin = new Thickness(5, 0, 5, 5);
+            deleteButton.FontWeight = FontWeights.Light;
+            deleteButton.Click += OnDelete_click;
+
+            stackpanel.Children.Add(editButton);
+            stackpanel.Children.Add(deleteButton);
+            dropdown.Content = stackpanel;
+            activeDropdown = dropdown;
+        }
+
+        private void OnDelete_click(object sender, RoutedEventArgs e)
+        {
+            activeDropdown.IsOpen = false;
+            string activeText = activeTextBlock.Text;
+            string _delete_text_query = $"DELETE FROM Information WHERE Text = '{activeText}' AND Topic_Id = {topicId};";
+            DbExecution.ExecuteQuery(_delete_text_query);
+            infoPanel.Children.Clear();
+            DisplayText();
+        }
+
+        private void OnEdit_click(object sender, RoutedEventArgs e)
+        {
+            //editing logic
+            activeDropdown.IsOpen = false;
+
+            foreach (UIElement element in grid.Children)
+            {
+                if (element is TextBlock textBlock)
+                {
+                    textToChange = textBlock.Text;
+                    activeGrid.Children.Remove(textBlock);
+                    break; 
+                }
+            }
+            RichTextBox newTextBox = new();
+            newTextBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
+            newTextBox.FontSize = 14;
+            grid.Children.Add(newTextBox);
+            Grid.SetColumn(newTextBox, 0);
+            activeTextBox = newTextBox;
+
+            Button save = new Button();
+            save.Width = 120;
+            save.Height = 50;
+            save.Content = "Update";
+            save.Background = new SolidColorBrush(Colors.Crimson);
+            save.Click += OnUpdate_text_click;
+            //adding buttons
+            Button delete_text = new Button();
+            delete_text.Width = 120;
+            delete_text.Height = 50;
+            delete_text.Content = "Delete";
+            delete_text.Background = new SolidColorBrush(Colors.Crimson);
+            delete_text.Click += OnDelete_text_click;
+
+            grid.Children.Add(save);
+            grid.Children.Add(delete_text);
+
+            Grid.SetColumn(save, 1);
+            Grid.SetColumn(delete_text, 1);
+
+            save.Margin = new Thickness(50, 0, 0, 150);
+            delete_text.Margin = new Thickness(50, 0, 0, 0);
+
+        }
+        private void OnBack_to_menu_click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new MenuPage());
         }
@@ -144,7 +240,7 @@ namespace Info_G
             infoPanel.Children.Add(grid);
         }
 
-        private void AddCaption_click(object sender, RoutedEventArgs e)
+        private void OnAddCaption_click(object sender, RoutedEventArgs e)
         {
             RichTextBox captionBox = new RichTextBox();
             captionBox.FontSize = 14;
@@ -155,13 +251,24 @@ namespace Info_G
             Grid.SetColumn(captionBox, 0);
         }
 
-        private void Save_text_click(object sender, RoutedEventArgs e)
+        private void OnSave_text_click(object sender, RoutedEventArgs e)
         {
             string active_text = new TextRange(activeTextBox.Document.ContentStart, activeTextBox.Document.ContentEnd).Text;
             string _save_text_query = $"INSERT INTO Information VALUES('{active_text}', NULL, {topicId});";
             DbExecution.ExecuteQuery(_save_text_query);
+            infoPanel.Children.Clear();
+            DisplayText();
         }
 
+        private void OnUpdate_text_click(object sender, RoutedEventArgs e)
+        {
+            string active_text = new TextRange(activeTextBox.Document.ContentStart, activeTextBox.Document.ContentEnd).Text;
+            string _update_text_query = $"UPDATE Information SET Text = '{active_text}' WHERE Text = '{textToChange}';";
+            DbExecution.ExecuteQuery(_update_text_query);
+            textToChange = String.Empty;
+            infoPanel.Children.Clear();
+            DisplayText();
+        }
 
         private void OnAddText_click(object sender, RoutedEventArgs e)
         {
@@ -192,14 +299,14 @@ namespace Info_G
             save.Height = 50;
             save.Content = "Save";
             save.Background = new SolidColorBrush(Colors.Crimson);
-            save.Click += Save_text_click;
+            save.Click += OnSave_text_click;
             //adding buttons
             Button delete_text = new Button();
             delete_text.Width = 120;
             delete_text.Height = 50;
             delete_text.Content = "Delete";
             delete_text.Background = new SolidColorBrush(Colors.Crimson);
-            delete_text.Click += Delete_text_click;
+            delete_text.Click += OnDelete_text_click;
 
             grid.Children.Add(save);
             grid.Children.Add(delete_text);
@@ -211,9 +318,9 @@ namespace Info_G
             delete_text.Margin = new Thickness(50, 0, 0, 0);
         }
 
-        private void Delete_text_click(object sender, RoutedEventArgs e)
+        private void OnDelete_text_click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            infoPanel.Children.Remove(activeGrid);
         }
 
         private void InformationPage_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -244,7 +351,7 @@ namespace Info_G
             add_caption.Height = 50;
             add_caption.Content = "Add Caption";
             add_caption.Background = new SolidColorBrush(Colors.Crimson);
-            add_caption.Click += AddCaption_click;
+            add_caption.Click += OnAddCaption_click;
 
             Button save = new Button();
             save.Width = 120;

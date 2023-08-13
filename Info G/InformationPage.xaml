@@ -55,7 +55,7 @@
                 Height="80"
                 Width="200" 
                 DockPanel.Dock="Right"
-                Click="Back_to_menu_click">
+                Click="OnBack_to_menu_click">
                 Back to menu
             </Button>
         </DockPanel>
