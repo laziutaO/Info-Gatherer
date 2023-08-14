@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +33,11 @@ namespace Info_G
         private string textToChange { get; set; } = string.Empty;
 
         private Image activeImage { get; set; }
-        private Image imageControl { get; set; }   
+        private Image imageControl { get; set; } 
+        
+        private ImageSection activeImageSection { get; set; }
+
+        private Grid imageGrid { get; set; }
         
         private DropdownTopic activeDropdown { get; set; }
 
@@ -63,8 +68,8 @@ namespace Info_G
                     }
 
                     else if (element is Image image) 
-                    { 
-                        //
+                    {
+                        imageGrid = grid;
                     }
                 }
             }
@@ -202,55 +207,31 @@ namespace Info_G
 
         private void OnAddPhoto_click(object sender, RoutedEventArgs e)
         {
-            //creating panel for pasting image
-            imageControl = new();
-            imageControl.Width = 800; // Set your desired width value
-            imageControl.Height = 400; // Set your desired height value
             
-            //creating canvas panel
-            grid = new();
-            grid.Width = 1100;
-            grid.Height = 500;
-            grid.Margin = new Thickness(0, 50, 0, 0);
-
-            RowDefinition rowDef1 = new RowDefinition();
-            rowDef1.Height = new GridLength(400); // Set the height to 120
-
-            RowDefinition rowDef2 = new RowDefinition();
-            rowDef2.Height = new GridLength (50);
-
-            RowDefinition rowDef3 = new RowDefinition();
-
-            ColumnDefinition columnDef1 = new ColumnDefinition();
-            columnDef1.Width = new GridLength(800);
-
-            ColumnDefinition columnDef2 = new ColumnDefinition();
-
-            grid.RowDefinitions.Add(rowDef1);
-            grid.RowDefinitions.Add(rowDef2);
-            grid.RowDefinitions.Add (rowDef3);
-
-            grid.ColumnDefinitions.Add(columnDef1);
-            grid.ColumnDefinitions.Add(columnDef2);
-
-            grid.Background = new SolidColorBrush(Colors.Wheat);
-            grid.Children.Add(imageControl);
-            Grid.SetColumn(imageControl, 0);
-            Grid.SetRow(imageControl, 0);
-            infoPanel.Children.Add(grid);
+            ImageSection imageSection = new ImageSection();
+            infoPanel.Children.Add(imageSection.grid);
         }
 
         private void OnAddCaption_click(object sender, RoutedEventArgs e)
         {
             RichTextBox captionBox = new RichTextBox();
             captionBox.FontSize = 14;
-            grid.Children.Add(captionBox);
-            grid.Margin = new Thickness(0, 50, 0, 0);
+            imageGrid.Children.Add(captionBox);
+            imageGrid.Margin = new Thickness(0, 50, 0, 0);
 
             Grid.SetRow(captionBox, 2);
             Grid.SetColumn(captionBox, 0);
         }
 
+        private void OnRemoveImage_click(object sender, RoutedEventArgs e) 
+        { 
+            infoPanel.Children.Remove(imageGrid);
+        }
+
+        private void OnSaveImage_click(object sender, RoutedEventArgs e)
+        {
+
+        }
         private void OnSave_text_click(object sender, RoutedEventArgs e)
         {
             string active_text = new TextRange(activeTextBox.Document.ContentStart, activeTextBox.Document.ContentEnd).Text;
@@ -344,7 +325,7 @@ namespace Info_G
 
         private void SpawnSaveAndCaptionButtons()
         {
-            if (grid == null) return;
+            if (imageGrid == null) return;
 
             Button add_caption = new Button();
             add_caption.Width = 120;
@@ -364,10 +345,11 @@ namespace Info_G
             remove_image.Height = 50;
             remove_image.Content = "Remove image";
             remove_image.Background = new SolidColorBrush(Colors.Crimson);
+            remove_image.Click += OnRemoveImage_click;
 
-            grid.Children.Add(add_caption);
-            grid.Children.Add(save);
-            grid.Children.Add(remove_image);
+            imageGrid.Children.Add(add_caption);
+            imageGrid.Children.Add(save);
+            imageGrid.Children.Add(remove_image);
 
             Grid.SetRow(add_caption, 0);
             Grid.SetRow(save, 0);
