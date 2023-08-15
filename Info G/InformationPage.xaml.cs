@@ -31,13 +31,8 @@ namespace Info_G
         public int topicId { get; set; }
 
         private string textToChange { get; set; } = string.Empty;
-
-        private Image activeImage { get; set; }
-        private Image imageControl { get; set; } 
         
         private ImageSection activeImageSection { get; set; }
-
-        private Grid imageGrid { get; set; }
         
         private DropdownTopic activeDropdown { get; set; }
 
@@ -67,10 +62,6 @@ namespace Info_G
                         activeTextBlock = textBlock;
                     }
 
-                    else if (element is Image image) 
-                    {
-                        imageGrid = grid;
-                    }
                 }
             }
         }
@@ -207,31 +198,11 @@ namespace Info_G
 
         private void OnAddPhoto_click(object sender, RoutedEventArgs e)
         {
-            
-            ImageSection imageSection = new ImageSection();
+            ImageSection imageSection = new ImageSection(topicId);
+            activeImageSection = imageSection;      
             infoPanel.Children.Add(imageSection.grid);
         }
 
-        private void OnAddCaption_click(object sender, RoutedEventArgs e)
-        {
-            RichTextBox captionBox = new RichTextBox();
-            captionBox.FontSize = 14;
-            imageGrid.Children.Add(captionBox);
-            imageGrid.Margin = new Thickness(0, 50, 0, 0);
-
-            Grid.SetRow(captionBox, 2);
-            Grid.SetColumn(captionBox, 0);
-        }
-
-        private void OnRemoveImage_click(object sender, RoutedEventArgs e) 
-        { 
-            infoPanel.Children.Remove(imageGrid);
-        }
-
-        private void OnSaveImage_click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void OnSave_text_click(object sender, RoutedEventArgs e)
         {
             string active_text = new TextRange(activeTextBox.Document.ContentStart, activeTextBox.Document.ContentEnd).Text;
@@ -306,61 +277,22 @@ namespace Info_G
 
         private void InformationPage_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (imageControl != null && Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            if (activeImageSection.imageControl != null && Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
                 if (e.Key == Key.V)
                 {
                     if (Clipboard.ContainsImage())
                     {
                         BitmapSource imageSource = Clipboard.GetImage();
-                        imageControl.Source = imageSource;
+                        activeImageSection.imageControl.Source = imageSource;
                         
-                        SpawnSaveAndCaptionButtons();
+                        activeImageSection.SpawnSaveAndCaptionButtons();
                     }
-
                 }
             }
 
         }
 
-        private void SpawnSaveAndCaptionButtons()
-        {
-            if (imageGrid == null) return;
-
-            Button add_caption = new Button();
-            add_caption.Width = 120;
-            add_caption.Height = 50;
-            add_caption.Content = "Add Caption";
-            add_caption.Background = new SolidColorBrush(Colors.Crimson);
-            add_caption.Click += OnAddCaption_click;
-
-            Button save = new Button();
-            save.Width = 120;
-            save.Height = 50;
-            save.Content = "Save";
-            save.Background = new SolidColorBrush(Colors.Crimson);
-
-            Button remove_image = new Button();
-            remove_image.Width = 120;
-            remove_image.Height = 50;
-            remove_image.Content = "Remove image";
-            remove_image.Background = new SolidColorBrush(Colors.Crimson);
-            remove_image.Click += OnRemoveImage_click;
-
-            imageGrid.Children.Add(add_caption);
-            imageGrid.Children.Add(save);
-            imageGrid.Children.Add(remove_image);
-
-            Grid.SetRow(add_caption, 0);
-            Grid.SetRow(save, 0);
-            Grid.SetRow(remove_image, 0);
-            Grid.SetColumn(add_caption, 1);
-            Grid.SetColumn(save, 1);
-            Grid.SetColumn(remove_image, 1);
-
-            add_caption.Margin = new Thickness(50, 0, 0, 300);
-            save.Margin = new Thickness(50, 0, 0, 150);
-            remove_image.Margin = new Thickness(50, 0, 0, 0);
-        }
+        
     }
 }

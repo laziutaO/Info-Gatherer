@@ -73,6 +73,27 @@ namespace Info_G
             return result;
         }
 
+        public static void SaveImageToDatabase(byte[] imageBytes, string query)
+        {
+            cnn = new SqlConnection(connectionString);
+
+            try
+            {
+                cnn.Open();
+
+                using (SqlCommand command = new SqlCommand(query, cnn))
+                {
+                    command.Parameters.AddWithValue("@ImageData", imageBytes);
+                    command.ExecuteNonQuery();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occurred: " + ex.Message);
+            }
+        }
+
         public static IEnumerable<string> ReadRows(string query) 
         {
             cnn = new SqlConnection(connectionString);
