@@ -19,7 +19,7 @@ namespace Info_G
 
         public static string read_names = "SELECT Name FROM Topic";
 
-        public static string read_text = "SELECT Text FROM Information WHERE Text IS NOT NULL;";
+        public static string read_text = "SELECT Image, Text FROM Information;";
 
         static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=info_g_db;Integrated Security=True;";
         public static void ExecuteQuery(string query)
@@ -94,7 +94,26 @@ namespace Info_G
             }
         }
 
-        public static IEnumerable<string> ReadRows(string query) 
+        public static DataTable ReadRows(string query) 
+        {
+            cnn = new SqlConnection(connectionString);
+            //openning connection
+            cnn.Open();
+
+            //applying query to the table
+            SqlCommand cmd = new SqlCommand(query, cnn);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            
+            
+            cmd.Dispose();
+            cnn.Close();
+            return dataTable;
+
+        }
+
+        public static IEnumerable<string> ReadNames(string query)
         {
             cnn = new SqlConnection(connectionString);
             //openning connection
@@ -114,6 +133,6 @@ namespace Info_G
 
         }
 
-       
+
     }
 }

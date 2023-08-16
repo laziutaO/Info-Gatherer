@@ -21,22 +21,35 @@ namespace Info_G
 
         public Image imageControl { get; set; }
 
-        public RichTextBox captionTextBox { get; set; }
-
         public RichTextBox captionBox { get; set; }
 
-        public ImageSection(int topicId)
+        public TextBlock captionBlock { get; set; }
+
+        private InformationPage infoPage;
+
+        public ImageSection(int topicId, InformationPage infoPage)
         {
             this.topicId = topicId;
+            this.infoPage = infoPage;
+        }
+
+        public void SetUpImageSection()
+        {
             SettingUpImage();
             SettingUpGrid();
         }
-
-        private void SettingUpGrid()
+        public void SetSavedImageShowing()
+        {
+            SettingUpImage();
+            SettingUpGrid(creatingImage: false);
+            
+        }
+        private void SettingUpGrid(bool creatingImage = true, int width = 1100, int height = 500)
         {
             grid = new();
-            grid.Width = 1100;
-            grid.Height = 500;
+            grid.Width = width;
+            if(creatingImage)
+                grid.Height = height;
             grid.Margin = new Thickness(0, 50, 0, 0);
 
             RowDefinition rowDef1 = new RowDefinition();
@@ -81,6 +94,19 @@ namespace Info_G
 
             Grid.SetRow(captionBox, 2);
             Grid.SetColumn(captionBox, 0);
+        }
+
+        public void SetCaptionBlock(string text)
+        {
+            captionBlock = new();
+            captionBlock.Text = text;
+            captionBlock.FontSize = 14;
+            grid.Children.Add(captionBlock);
+            grid.Margin = new Thickness(0, 50, 0, 0);
+
+            Grid.SetRow(captionBlock, 2);
+            Grid.SetColumn(captionBlock, 0);
+            
         }
 
         public void SpawnSaveAndCaptionButtons()
@@ -164,19 +190,52 @@ namespace Info_G
                 query = $"INSERT INTO Information VALUES (NULL, @ImageData, {topicId})";
 
             DbExecution.SaveImageToDatabase(imageBytes, query);
+
+            RemoveGrid();
+            infoPage.DisplayText();
         }
 
-       
-
-        private void OnRemoveImage_click(object sender, RoutedEventArgs e)
+        private void RemoveGrid()
         {
-            // Get the parent of the button, which is the Grid
+            // get parent
             WrapPanel panel = VisualTreeHelper.GetParent(grid) as WrapPanel;
 
             // If the parent is not null and it's a child of the infoPanel, remove it
             if (panel != null && panel.Children.Contains(grid))
             {
                 panel.Children.Remove(grid);
+            }
+        }
+
+        private void OnRemoveImage_click(object sender, RoutedEventArgs e)
+        {
+            RemoveGrid();
+        }
+
+        private BitmapImage ConvertByteArrayToBitmapImage(byte[] byteArray)
+        {
+            if (byteArray == null || byteArray.Length == 0)
+                return null;
+
+            using (MemoryStream stream = new MemoryStream(byteArray))
+            {
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.StreamSource = stream;
+                image.EndInit();
+                return image;
+            }
+        }
+
+        // In your event handler
+        public void DisplayImageFromByteArray(byte[] imageBytes)
+        {
+            BitmapImage image = ConvertByteArrayToBitmapImage(imageBytes);
+            if (image != null)
+            {
+                // Set the BitmapImage as the Source of your Image control
+                imageControl.Source = image;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using DropdownTopicControl;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -31,9 +32,25 @@ namespace Info_G
         public int topicId { get; set; }
 
         private string textToChange { get; set; } = string.Empty;
-        
-        private ImageSection activeImageSection { get; set; }
-        
+
+        private ImageSection _activeImageSection;
+
+        private ImageSection ActiveImageSection
+        {
+            get
+            {
+                if (_activeImageSection == null)
+                {
+                    _activeImageSection = new ImageSection(topicId, this);
+                }
+                return _activeImageSection;
+            }
+            set
+            {
+                _activeImageSection = value;
+            }
+        }
+
         private DropdownTopic activeDropdown { get; set; }
 
         Grid grid { get; set; }
@@ -70,39 +87,59 @@ namespace Info_G
         {
             try
             {
-                foreach (string text in DbExecution.ReadRows(DbExecution.read_text))
+                DataTable dt = DbExecution.ReadRows(DbExecution.read_text);
+                foreach (DataRow row in dt.Rows)
                 {
-                    grid = new();
-                    grid.Width = 1100;
-                    grid.Background = new SolidColorBrush(Colors.Beige);
-                    grid.Margin = new Thickness(0, 50, 0, 0);
-                    grid.MouseEnter += Grid_MouseEnter;
+                    if (!row.IsNull("Image"))
+                    {
+                        ImageSection imSection = new(topicId: topicId, this);
+                        imSection.SetSavedImageShowing();
 
-                    ColumnDefinition columnDef1 = new ColumnDefinition();
-                    columnDef1.Width = new GridLength(800);
+                        byte[] imageByteArray = (byte[])row["Image"];
+                        imSection.DisplayImageFromByteArray(imageByteArray);
 
-                    ColumnDefinition columnDef2 = new ColumnDefinition();
+                        if (!row.IsNull("Text")) 
+                            imSection.SetCaptionBlock(row["Text"].ToString());
 
-                    grid.ColumnDefinitions.Add(columnDef1);
-                    grid.ColumnDefinitions.Add(columnDef2);
-                    infoPanel.Children.Add(grid);
+                        infoPanel.Children.Add(imSection.grid);
 
-                    TextBlock textBlock = new();
-                    textBlock.Width = 800;
-                    textBlock.Text = text;
-                    grid.Children.Add(textBlock);
-                    Grid.SetColumn(textBlock, 0);
-                   
+                    }
 
-                    DropdownTopic dropdownTopic = new DropdownTopic();
+                    else
+                    {
+                        grid = new();
+                        grid.Width = 1100;
+                        grid.Background = new SolidColorBrush(Colors.Beige);
+                        grid.Margin = new Thickness(0, 50, 0, 0);
+                        grid.MouseEnter += Grid_MouseEnter;
+
+                        ColumnDefinition columnDef1 = new ColumnDefinition();
+                        columnDef1.Width = new GridLength(800);
+
+                        ColumnDefinition columnDef2 = new ColumnDefinition();
+
+                        grid.ColumnDefinitions.Add(columnDef1);
+                        grid.ColumnDefinitions.Add(columnDef2);
+                        infoPanel.Children.Add(grid);
+
+                        TextBlock textBlock = new();
+                        textBlock.Width = 800;
+                        textBlock.Text = row["Text"].ToString();
+                        grid.Children.Add(textBlock);
+                        Grid.SetColumn(textBlock, 0);
+
+
+                        DropdownTopic dropdownTopic = new DropdownTopic();
+
+                        dropdownTopic.Height = 20;
+                        dropdownTopic.Width = 14;
+                        dropdownTopic.VerticalAlignment = VerticalAlignment.Top;
+                        grid.Children.Add(dropdownTopic);
+                        Grid.SetColumn(dropdownTopic, 1);
+                        dropdownTopic.Margin = new Thickness(0, 0, 0, 0);
+                        SetEditButton(ref dropdownTopic, row["Text"].ToString());
+                    }
                     
-                    dropdownTopic.Height = 20;
-                    dropdownTopic.Width = 14;
-                    dropdownTopic.VerticalAlignment = VerticalAlignment.Top;
-                    grid.Children.Add(dropdownTopic);
-                    Grid.SetColumn(dropdownTopic, 1);
-                    dropdownTopic.Margin = new Thickness(0, 0, 0, 0);
-                    SetEditButton(ref dropdownTopic, text);
                 }
             }
             catch (Exception ex)
@@ -198,8 +235,9 @@ namespace Info_G
 
         private void OnAddPhoto_click(object sender, RoutedEventArgs e)
         {
-            ImageSection imageSection = new ImageSection(topicId);
-            activeImageSection = imageSection;      
+            ImageSection imageSection = new ImageSection(topicId, this);
+            imageSection.SetUpImageSection();
+            ActiveImageSection = imageSection;      
             infoPanel.Children.Add(imageSection.grid);
         }
 
@@ -277,16 +315,16 @@ namespace Info_G
 
         private void InformationPage_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (activeImageSection.imageControl != null && Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            if (ActiveImageSection.imageControl != null && Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
                 if (e.Key == Key.V)
                 {
                     if (Clipboard.ContainsImage())
                     {
                         BitmapSource imageSource = Clipboard.GetImage();
-                        activeImageSection.imageControl.Source = imageSource;
+                        ActiveImageSection.imageControl.Source = imageSource;
                         
-                        activeImageSection.SpawnSaveAndCaptionButtons();
+                        ActiveImageSection.SpawnSaveAndCaptionButtons();
                     }
                 }
             }

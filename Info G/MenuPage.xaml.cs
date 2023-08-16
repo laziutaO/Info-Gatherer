@@ -85,7 +85,7 @@ namespace Info_G
             menuPanel.Children.Clear();
             try
             {
-                foreach (string name in DbExecution.ReadRows(DbExecution.read_names))
+                foreach (string name in DbExecution.ReadNames(DbExecution.read_names))
                 {
                     Canvas button_canvas = new Canvas();
                     button_canvas.Height = 170;
