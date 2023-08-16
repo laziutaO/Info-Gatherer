@@ -51,7 +51,7 @@ namespace Info_G
             }
         }
 
-        private DropdownTopic activeDropdown { get; set; }
+        public DropdownTopic activeDropdown { get; set; }
 
         Grid grid { get; set; }
 
@@ -82,14 +82,25 @@ namespace Info_G
                 }
             }
         }
+        private DropdownTopic SetDropdown()
+        {
+            DropdownTopic dropdownTopic = new DropdownTopic();
 
+            dropdownTopic.Height = 20;
+            dropdownTopic.Width = 14;
+            dropdownTopic.VerticalAlignment = VerticalAlignment.Top;
+            return dropdownTopic;
+        }
         public void DisplayText()
         {
             try
             {
                 DataTable dt = DbExecution.ReadRows(DbExecution.read_text);
+
                 foreach (DataRow row in dt.Rows)
                 {
+                    DropdownTopic dropdownTopic = SetDropdown();
+                    string text = row["Text"].ToString();
                     if (!row.IsNull("Image"))
                     {
                         ImageSection imSection = new(topicId: topicId, this);
@@ -99,10 +110,10 @@ namespace Info_G
                         imSection.DisplayImageFromByteArray(imageByteArray);
 
                         if (!row.IsNull("Text")) 
-                            imSection.SetCaptionBlock(row["Text"].ToString());
+                            imSection.SetCaptionBlock(text);
 
                         infoPanel.Children.Add(imSection.grid);
-
+                        imSection.SetEditButton(ref dropdownTopic);
                     }
 
                     else
@@ -126,18 +137,18 @@ namespace Info_G
                         textBlock.Width = 800;
                         textBlock.Text = row["Text"].ToString();
                         grid.Children.Add(textBlock);
+
                         Grid.SetColumn(textBlock, 0);
 
+                        dropdownTopic = SetDropdown();
 
-                        DropdownTopic dropdownTopic = new DropdownTopic();
-
-                        dropdownTopic.Height = 20;
-                        dropdownTopic.Width = 14;
-                        dropdownTopic.VerticalAlignment = VerticalAlignment.Top;
                         grid.Children.Add(dropdownTopic);
+
                         Grid.SetColumn(dropdownTopic, 1);
+
                         dropdownTopic.Margin = new Thickness(0, 0, 0, 0);
-                        SetEditButton(ref dropdownTopic, row["Text"].ToString());
+
+                        SetEditButton(ref dropdownTopic);
                     }
                     
                 }
@@ -147,7 +158,7 @@ namespace Info_G
                 MessageBox.Show("Error occurred: " + ex.Message);
             }
         }
-        private void SetEditButton(ref DropdownTopic dropdown, string curNameTopic)
+        private void SetEditButton(ref DropdownTopic dropdown)
         {
             
             StackPanel stackpanel = new();
@@ -253,7 +264,7 @@ namespace Info_G
         private void OnUpdate_text_click(object sender, RoutedEventArgs e)
         {
             string active_text = new TextRange(activeTextBox.Document.ContentStart, activeTextBox.Document.ContentEnd).Text;
-            string _update_text_query = $"UPDATE Information SET Text = '{active_text}' WHERE Text = '{textToChange}';";
+            string _update_text_query = $"UPDATE Information SET Text = '{active_text}' WHERE Text = '{textToChange}' AND Topic_Id = {topicId};";
             DbExecution.ExecuteQuery(_update_text_query);
             textToChange = String.Empty;
             infoPanel.Children.Clear();

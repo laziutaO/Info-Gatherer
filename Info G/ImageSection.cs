@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DropdownTopicControl;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +27,8 @@ namespace Info_G
         public TextBlock captionBlock { get; set; }
 
         private InformationPage infoPage;
+
+        private string textToChange { get; set; } = string.Empty;
 
         public ImageSection(int topicId, InformationPage infoPage)
         {
@@ -155,6 +158,89 @@ namespace Info_G
             SetCaptionBox();
         }
 
+        public void SetEditButton(ref DropdownTopic dropdown)
+        {
+            StackPanel stackpanel = new();
+
+            Button editButton = new Button();
+            editButton.Content = "Edit caption";
+            editButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            editButton.Margin = new Thickness(5, 5, 5, 5);
+            editButton.FontWeight = FontWeights.Light;
+            editButton.Width = 150;
+            editButton.Click += OnEdit_click;
+
+            Button deleteIMageButton = new Button();
+            deleteIMageButton.Content = "Delete image";
+            deleteIMageButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            deleteIMageButton.Margin = new Thickness(5, 0, 5, 5);
+            deleteIMageButton.FontWeight = FontWeights.Light;
+            //deleteIMageButton.Click += OnDeleteImage_click;
+
+            Button deleteSectionButton = new Button();
+            deleteIMageButton.Content = "Delete section";
+            deleteIMageButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            deleteIMageButton.Margin = new Thickness(5, 0, 5, 5);
+            deleteIMageButton.FontWeight = FontWeights.Light;
+            //deleteIMageButton.Click += OnDeleteSection_click;
+
+            stackpanel.Children.Add(editButton);
+            stackpanel.Children.Add(deleteIMageButton);
+            stackpanel.Children.Add(deleteSectionButton);
+            dropdown.Content = stackpanel;
+
+            grid.Children.Add(dropdown);
+
+            Grid.SetColumn(dropdown, 1);
+
+            dropdown.Margin = new Thickness(0, 0, 0, 0);
+            infoPage.activeDropdown = dropdown;
+        }
+
+        private void OnEdit_click(object sender, RoutedEventArgs e)
+        {
+            //editing logic
+            infoPage.activeDropdown.IsOpen = false;
+
+            foreach (UIElement element in grid.Children)
+            {
+                if (element is TextBlock textBlock)
+                {
+                    textToChange = textBlock.Text;
+                    grid.Children.Remove(textBlock);
+                    break;
+                }
+            }
+            captionBox = new();
+            captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
+            captionBox.FontSize = 14;
+            grid.Children.Add(captionBox);
+            Grid.SetColumn(captionBox, 0);
+
+            Button save = new Button();
+            save.Width = 120;
+            save.Height = 50;
+            save.Content = "Update";
+            save.Background = new SolidColorBrush(Colors.Crimson);
+            save.Click += OnUpdate_text_click;
+
+            //adding button
+            grid.Children.Add(save);
+
+            Grid.SetColumn(save, 1);
+
+            save.Margin = new Thickness(50, 0, 0, 150);
+
+        }
+        private void OnUpdate_text_click(object sender, RoutedEventArgs e)
+        {
+            string active_text = new TextRange(captionBox.Document.ContentStart, captionBox.Document.ContentEnd).Text;
+            string _update_text_query = $"UPDATE Information SET Text = '{active_text}' WHERE Text = '{textToChange}' AND Topic_Id = {topicId};";
+            DbExecution.ExecuteQuery(_update_text_query);
+            textToChange = String.Empty;
+            infoPage.infoPanel.Children.Clear();
+            infoPage.DisplayText();
+        }
 
         private byte[] ConvertImageSourceToByteArray(ImageSource imageSource)
         {
@@ -227,8 +313,6 @@ namespace Info_G
                 return image;
             }
         }
-
-        // In your event handler
         public void DisplayImageFromByteArray(byte[] imageBytes)
         {
             BitmapImage image = ConvertByteArrayToBitmapImage(imageBytes);
