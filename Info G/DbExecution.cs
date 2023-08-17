@@ -19,8 +19,6 @@ namespace Info_G
 
         public static string read_names = "SELECT Name FROM Topic";
 
-        public static string read_text = "SELECT Image, Text FROM Information;";
-
         static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=info_g_db;Integrated Security=True;";
         public static void ExecuteQuery(string query)
         {
@@ -94,18 +92,18 @@ namespace Info_G
             }
         }
 
-        public static DataTable ReadRows(string query) 
+        public static DataTable ReadRows(int topicId) 
         {
+            string read_text = $"SELECT Id, Image, Text FROM Information WHERE Topic_Id = {topicId};";
             cnn = new SqlConnection(connectionString);
             //openning connection
             cnn.Open();
 
             //applying query to the table
-            SqlCommand cmd = new SqlCommand(query, cnn);
+            SqlCommand cmd = new SqlCommand(read_text, cnn);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
-            
             
             cmd.Dispose();
             cnn.Close();

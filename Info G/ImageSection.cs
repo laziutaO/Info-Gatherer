@@ -18,6 +18,8 @@ namespace Info_G
     public class ImageSection
     {
         public int topicId { get; set; }
+
+        public int sectionId { get; set; }  
         public Grid grid { get; set; }
 
         public Image imageControl { get; set; }
@@ -28,7 +30,7 @@ namespace Info_G
 
         private InformationPage infoPage;
 
-        private string textToChange { get; set; } = string.Empty;
+        private string textToChange { get; set; } = String.Empty;
 
         public ImageSection(int topicId, InformationPage infoPage)
         {
@@ -164,7 +166,8 @@ namespace Info_G
 
             Button editButton = new Button();
             editButton.Content = "Edit caption";
-            editButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            // Adjust the padding value to reduce the gap
+            editButton.Padding = new Thickness(1); 
             editButton.Margin = new Thickness(5, 5, 5, 5);
             editButton.FontWeight = FontWeights.Light;
             editButton.Width = 150;
@@ -172,14 +175,16 @@ namespace Info_G
 
             Button deleteIMageButton = new Button();
             deleteIMageButton.Content = "Delete image";
-            deleteIMageButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            // Adjust the padding value to reduce the gap
+            deleteIMageButton.Padding = new Thickness(1); 
             deleteIMageButton.Margin = new Thickness(5, 0, 5, 5);
             deleteIMageButton.FontWeight = FontWeights.Light;
-            //deleteIMageButton.Click += OnDeleteImage_click;
+            deleteIMageButton.Click += OnDeleteImage_click;
 
             Button deleteSectionButton = new Button();
             deleteIMageButton.Content = "Delete section";
-            deleteIMageButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
+            // Adjust the padding value to reduce the gap
+            deleteIMageButton.Padding = new Thickness(1); 
             deleteIMageButton.Margin = new Thickness(5, 0, 5, 5);
             deleteIMageButton.FontWeight = FontWeights.Light;
             //deleteIMageButton.Click += OnDeleteSection_click;
@@ -211,11 +216,13 @@ namespace Info_G
                     break;
                 }
             }
+
             captionBox = new();
             captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
             captionBox.FontSize = 14;
             grid.Children.Add(captionBox);
             Grid.SetColumn(captionBox, 0);
+            Grid.SetRow(captionBox, 1);
 
             Button save = new Button();
             save.Width = 120;
@@ -235,9 +242,17 @@ namespace Info_G
         private void OnUpdate_text_click(object sender, RoutedEventArgs e)
         {
             string active_text = new TextRange(captionBox.Document.ContentStart, captionBox.Document.ContentEnd).Text;
-            string _update_text_query = $"UPDATE Information SET Text = '{active_text}' WHERE Text = '{textToChange}' AND Topic_Id = {topicId};";
+            string _update_text_query = $"UPDATE Information SET Text = '{active_text}' WHERE Id = {sectionId};";
             DbExecution.ExecuteQuery(_update_text_query);
             textToChange = String.Empty;
+            infoPage.infoPanel.Children.Clear();
+            infoPage.DisplayText();
+        }
+
+        private void OnDeleteImage_click(object sender, RoutedEventArgs e)
+        {
+            string _delete_text_query = $"DELETE FROM Information WHERE Id = {sectionId} AND Topic_Id = {topicId};";
+            DbExecution.ExecuteQuery(_delete_text_query);
             infoPage.infoPanel.Children.Clear();
             infoPage.DisplayText();
         }
@@ -278,6 +293,7 @@ namespace Info_G
             DbExecution.SaveImageToDatabase(imageBytes, query);
 
             RemoveGrid();
+            infoPage.infoPanel.Children.Clear();
             infoPage.DisplayText();
         }
 
@@ -318,7 +334,7 @@ namespace Info_G
             BitmapImage image = ConvertByteArrayToBitmapImage(imageBytes);
             if (image != null)
             {
-                // Set the BitmapImage as the Source of your Image control
+                // Set the BitmapImage as the Source of Image control
                 imageControl.Source = image;
             }
         }

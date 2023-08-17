@@ -41,7 +41,7 @@ namespace Info_G
             {
                 if (_activeImageSection == null)
                 {
-                    _activeImageSection = new ImageSection(topicId, this);
+                    _activeImageSection = new ImageSection(topicId: topicId, infoPage: this);
                 }
                 return _activeImageSection;
             }
@@ -95,15 +95,19 @@ namespace Info_G
         {
             try
             {
-                DataTable dt = DbExecution.ReadRows(DbExecution.read_text);
+                MessageBox.Show($"{topicId}");
+                DataTable dt = DbExecution.ReadRows(topicId);
 
                 foreach (DataRow row in dt.Rows)
                 {
                     DropdownTopic dropdownTopic = SetDropdown();
+                    
                     string text = row["Text"].ToString();
                     if (!row.IsNull("Image"))
                     {
-                        ImageSection imSection = new(topicId: topicId, this);
+                        int imageId = (int)row["Id"];
+                        ImageSection imSection = new(topicId: topicId, infoPage: this);
+                        imSection.sectionId = imageId;
                         imSection.SetSavedImageShowing();
 
                         byte[] imageByteArray = (byte[])row["Image"];
