@@ -22,6 +22,8 @@ namespace Info_G
         public int sectionId { get; set; }  
         public Grid grid { get; set; }
 
+        public Grid imageGrid { get; set; }
+
         public Image imageControl { get; set; }
 
         public RichTextBox captionBox { get; set; }
@@ -93,9 +95,10 @@ namespace Info_G
         public void SetCaptionBox()
         {
             captionBox = new RichTextBox();
-            captionBox.FontSize = 14;
+            captionBox.FontSize = 20;
+            captionBox.Margin = new Thickness(20, 10, 0, 0);
             grid.Children.Add(captionBox);
-            grid.Margin = new Thickness(0, 50, 0, 0);
+            grid.Margin = new Thickness(20, 50, 0, 0);
 
             Grid.SetRow(captionBox, 2);
             Grid.SetColumn(captionBox, 0);
@@ -105,9 +108,10 @@ namespace Info_G
         {
             captionBlock = new();
             captionBlock.Text = text;
-            captionBlock.FontSize = 14;
+            captionBlock.FontSize = 20;
+            captionBlock.Margin = new Thickness(20, 10, 0, 0);
             grid.Children.Add(captionBlock);
-            grid.Margin = new Thickness(0, 50, 0, 0);
+            grid.Margin = new Thickness(20, 50, 0, 0);
 
             Grid.SetRow(captionBlock, 2);
             Grid.SetColumn(captionBlock, 0);
@@ -122,6 +126,8 @@ namespace Info_G
             add_caption.Width = 120;
             add_caption.Height = 50;
             add_caption.Content = "Add Caption";
+            add_caption.FontSize = 20;
+            add_caption.FontWeight = FontWeights.Bold;
             add_caption.Background = new SolidColorBrush(Colors.Crimson);
             add_caption.Click += OnAddCaption_click;
 
@@ -129,12 +135,16 @@ namespace Info_G
             save.Width = 120;
             save.Height = 50;
             save.Content = "Save";
+            save.FontSize = 20;
+            save.FontWeight = FontWeights.Bold;
             save.Background = new SolidColorBrush(Colors.Crimson);
             save.Click += OnSave_click;
 
             Button remove_image = new Button();
             remove_image.Width = 120;
             remove_image.Height = 50;
+            remove_image.FontWeight = FontWeights.Bold;
+            remove_image.FontSize = 20;
             remove_image.Content = "Remove image";
             remove_image.Background = new SolidColorBrush(Colors.Crimson);
             remove_image.Click += OnRemoveImage_click;
@@ -169,7 +179,9 @@ namespace Info_G
             // Adjust the padding value to reduce the gap
             editButton.Padding = new Thickness(1); 
             editButton.Margin = new Thickness(5, 5, 5, 5);
-            editButton.FontWeight = FontWeights.Light;
+            editButton.FontWeight = FontWeights.Bold;
+            editButton.Background = new SolidColorBrush(Colors.Crimson);
+            editButton.FontSize = 20;
             editButton.Width = 200;
             editButton.Height = 50;
             editButton.Click += OnEdit_click;
@@ -179,7 +191,9 @@ namespace Info_G
             // Adjust the padding value to reduce the gap
             deleteSectionButton.Padding = new Thickness(1); 
             deleteSectionButton.Margin = new Thickness(5, 0, 5, 5);
-            deleteSectionButton.FontWeight = FontWeights.Light;
+            deleteSectionButton.FontWeight = FontWeights.Bold;
+            deleteSectionButton.Background = new SolidColorBrush(Colors.Crimson);
+            deleteSectionButton.FontSize = 20;
             deleteSectionButton.Height = 50;
             deleteSectionButton.Click += OnDeleteSection_click;
 
@@ -212,7 +226,7 @@ namespace Info_G
 
             captionBox = new();
             captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
-            captionBox.FontSize = 14;
+            captionBox.FontSize = 20;
             grid.Children.Add(captionBox);
             Grid.SetColumn(captionBox, 0);
             Grid.SetRow(captionBox, 1);
@@ -220,6 +234,8 @@ namespace Info_G
             Button save = new Button();
             save.Width = 120;
             save.Height = 50;
+            save.FontSize = 20;
+            save.FontWeight = FontWeights.Bold;
             save.Content = "Update";
             save.Background = new SolidColorBrush(Colors.Crimson);
             save.Click += OnUpdate_text_click;

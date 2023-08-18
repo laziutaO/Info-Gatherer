@@ -139,14 +139,17 @@ namespace Info_G
 
                         TextBlock textBlock = new();
                         textBlock.Width = 800;
+                        textBlock.Margin = new Thickness(20, 10, 0, 0);
+                        textBlock.FontSize = 20;
                         textBlock.Text = row["Text"].ToString();
+                        grid.Margin = new Thickness(20, 50, 0, 0);
                         grid.Children.Add(textBlock);
 
                         Grid.SetColumn(textBlock, 0);
 
                         dropdownTopic = SetDropdown(40, 20);
 
-                        grid.Children.Add(dropdownTopic);
+                        grid.Children.Add(dropdownTopic); 
 
                         Grid.SetColumn(dropdownTopic, 1);
 
@@ -171,7 +174,9 @@ namespace Info_G
             editButton.Content = "Edit text";
             editButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
             editButton.Margin = new Thickness(5, 5, 5, 5);
-            editButton.FontWeight = FontWeights.Light;
+            editButton.FontWeight = FontWeights.Bold;
+            editButton.Background = new SolidColorBrush(Colors.Crimson);
+            editButton.FontSize = 20;
             editButton.Width = 120;
             editButton.Height = 50;
             editButton.Click += OnEdit_click;
@@ -180,7 +185,9 @@ namespace Info_G
             deleteButton.Content = "Delete";
             deleteButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
             deleteButton.Margin = new Thickness(5, 0, 5, 5);
-            deleteButton.FontWeight = FontWeights.Light;
+            deleteButton.Background = new SolidColorBrush(Colors.Crimson);
+            deleteButton.FontSize = 20;
+            deleteButton.FontWeight= FontWeights.Bold;
             deleteButton.Width = 120;
             deleteButton.Height = 50;
             deleteButton.Click += OnDelete_click;
@@ -217,7 +224,7 @@ namespace Info_G
             }
             RichTextBox newTextBox = new();
             newTextBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
-            newTextBox.FontSize = 14;
+            newTextBox.FontSize = 20;
             grid.Children.Add(newTextBox);
             Grid.SetColumn(newTextBox, 0);
             activeTextBox = newTextBox;
@@ -226,14 +233,18 @@ namespace Info_G
             save.Width = 120;
             save.Height = 50;
             save.Content = "Update";
+            save.FontWeight = FontWeights.Bold;
             save.Background = new SolidColorBrush(Colors.Crimson);
+            save.FontSize = 20;
             save.Click += OnUpdate_text_click;
             //adding buttons
             Button delete_text = new Button();
             delete_text.Width = 120;
             delete_text.Height = 50;
+            delete_text.FontWeight = FontWeights.Bold;
             delete_text.Content = "Delete";
             delete_text.Background = new SolidColorBrush(Colors.Crimson);
+            delete_text.FontSize = 20;
             delete_text.Click += OnDelete_text_click;
 
             grid.Children.Add(save);
@@ -285,8 +296,9 @@ namespace Info_G
             grid = new();
             grid.Width = 1100;
             grid.Height = 500;
+            grid.Margin = new Thickness(20, 50, 0, 0);
             grid.Background = new SolidColorBrush(Colors.Beige);
-            grid.Margin = new Thickness(0, 50,0,0);
+            grid.Margin = new Thickness(0, 50, 0, 0);
             grid.MouseEnter += Grid_MouseEnter;
 
             ColumnDefinition columnDef1 = new ColumnDefinition();
@@ -299,7 +311,7 @@ namespace Info_G
             infoPanel.Children.Add(grid);
 
             RichTextBox textBox = new RichTextBox();
-            textBox.FontSize = 14;
+            textBox.FontSize = 20;
             grid.Children.Add(textBox);
             Grid.SetColumn(textBox, 0);
 
@@ -307,6 +319,8 @@ namespace Info_G
             save.Width = 120;
             save.Height = 50;
             save.Content = "Save";
+            save.FontWeight = FontWeights.Bold;
+            save.FontSize = 20;
             save.Background = new SolidColorBrush(Colors.Crimson);
             save.Click += OnSave_text_click;
             //adding buttons
@@ -314,6 +328,8 @@ namespace Info_G
             delete_text.Width = 120;
             delete_text.Height = 50;
             delete_text.Content = "Delete";
+            delete_text.FontWeight = FontWeights.Bold;
+            delete_text.FontSize = 20;
             delete_text.Background = new SolidColorBrush(Colors.Crimson);
             delete_text.Click += OnDelete_text_click;
 
