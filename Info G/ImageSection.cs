@@ -170,27 +170,20 @@ namespace Info_G
             editButton.Padding = new Thickness(1); 
             editButton.Margin = new Thickness(5, 5, 5, 5);
             editButton.FontWeight = FontWeights.Light;
-            editButton.Width = 150;
+            editButton.Width = 200;
+            editButton.Height = 50;
             editButton.Click += OnEdit_click;
 
-            Button deleteIMageButton = new Button();
-            deleteIMageButton.Content = "Delete image";
-            // Adjust the padding value to reduce the gap
-            deleteIMageButton.Padding = new Thickness(1); 
-            deleteIMageButton.Margin = new Thickness(5, 0, 5, 5);
-            deleteIMageButton.FontWeight = FontWeights.Light;
-            deleteIMageButton.Click += OnDeleteImage_click;
-
             Button deleteSectionButton = new Button();
-            deleteIMageButton.Content = "Delete section";
+            deleteSectionButton.Content = "Delete section";
             // Adjust the padding value to reduce the gap
-            deleteIMageButton.Padding = new Thickness(1); 
-            deleteIMageButton.Margin = new Thickness(5, 0, 5, 5);
-            deleteIMageButton.FontWeight = FontWeights.Light;
-            //deleteIMageButton.Click += OnDeleteSection_click;
+            deleteSectionButton.Padding = new Thickness(1); 
+            deleteSectionButton.Margin = new Thickness(5, 0, 5, 5);
+            deleteSectionButton.FontWeight = FontWeights.Light;
+            deleteSectionButton.Height = 50;
+            deleteSectionButton.Click += OnDeleteSection_click;
 
             stackpanel.Children.Add(editButton);
-            stackpanel.Children.Add(deleteIMageButton);
             stackpanel.Children.Add(deleteSectionButton);
             dropdown.Content = stackpanel;
 
@@ -249,7 +242,7 @@ namespace Info_G
             infoPage.DisplayText();
         }
 
-        private void OnDeleteImage_click(object sender, RoutedEventArgs e)
+        private void OnDeleteSection_click(object sender, RoutedEventArgs e)
         {
             string _delete_text_query = $"DELETE FROM Information WHERE Id = {sectionId} AND Topic_Id = {topicId};";
             DbExecution.ExecuteQuery(_delete_text_query);

@@ -56,9 +56,10 @@ namespace Info_G
         Grid grid { get; set; }
 
         Grid activeGrid { get; set; }
-        public InformationPage()
+        public InformationPage(int topic_id)
         {
             InitializeComponent();
+            topicId = topic_id;
             DisplayText();
         }
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
@@ -82,12 +83,12 @@ namespace Info_G
                 }
             }
         }
-        private DropdownTopic SetDropdown()
+        private DropdownTopic SetDropdown(int height, int width)
         {
             DropdownTopic dropdownTopic = new DropdownTopic();
 
-            dropdownTopic.Height = 20;
-            dropdownTopic.Width = 14;
+            dropdownTopic.Height = height;
+            dropdownTopic.Width = width;
             dropdownTopic.VerticalAlignment = VerticalAlignment.Top;
             return dropdownTopic;
         }
@@ -95,12 +96,11 @@ namespace Info_G
         {
             try
             {
-                MessageBox.Show($"{topicId}");
                 DataTable dt = DbExecution.ReadRows(topicId);
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    DropdownTopic dropdownTopic = SetDropdown();
+                    DropdownTopic dropdownTopic = SetDropdown(40, 20);
                     
                     string text = row["Text"].ToString();
                     if (!row.IsNull("Image"))
@@ -144,7 +144,7 @@ namespace Info_G
 
                         Grid.SetColumn(textBlock, 0);
 
-                        dropdownTopic = SetDropdown();
+                        dropdownTopic = SetDropdown(40, 20);
 
                         grid.Children.Add(dropdownTopic);
 
@@ -172,7 +172,8 @@ namespace Info_G
             editButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
             editButton.Margin = new Thickness(5, 5, 5, 5);
             editButton.FontWeight = FontWeights.Light;
-            editButton.Width = 150;
+            editButton.Width = 120;
+            editButton.Height = 50;
             editButton.Click += OnEdit_click;
 
             Button deleteButton = new Button();
@@ -180,6 +181,8 @@ namespace Info_G
             deleteButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
             deleteButton.Margin = new Thickness(5, 0, 5, 5);
             deleteButton.FontWeight = FontWeights.Light;
+            deleteButton.Width = 120;
+            deleteButton.Height = 50;
             deleteButton.Click += OnDelete_click;
 
             stackpanel.Children.Add(editButton);
@@ -250,6 +253,7 @@ namespace Info_G
 
         private void OnAddPhoto_click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show($"{topicId}");
             ImageSection imageSection = new ImageSection(topicId, this);
             imageSection.SetUpImageSection();
             ActiveImageSection = imageSection;      

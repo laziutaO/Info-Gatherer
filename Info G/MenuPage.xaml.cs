@@ -70,15 +70,18 @@ namespace Info_G
 
         private void Topic_open_click(object sender, RoutedEventArgs e)
         {
-            InformationPage informationPage = new InformationPage();
-            informationPage.topicId = Get_TopicId();
+            // Get the topic ID first
+            int topicId = Get_TopicId();
+            // Set the topic ID
+            InformationPage informationPage = new InformationPage(topicId);
+            informationPage.topicId = topicId; 
             NavigationService.Navigate(informationPage);
         }
 
         private int Get_TopicId()
         {
-            string _get_topic_id = $"SELECT Id FROM Topic WHERE Name = '{oldNameTopic}'";
-            return (int)DbExecution.ExecuteReturnQuery(_get_topic_id) ;
+            string _get_topic_id = $"SELECT Id FROM Topic WHERE Name = '{oldNameTopic}';";
+            return (int)DbExecution.ExecuteReturnQuery(_get_topic_id);
         }
         public void DisplayTopics()
         {
