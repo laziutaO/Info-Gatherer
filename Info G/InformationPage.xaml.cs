@@ -41,7 +41,7 @@ namespace Info_G
             {
                 if (_activeImageSection == null)
                 {
-                    _activeImageSection = new ImageSection(topicId: topicId, infoPage: this);
+                    _activeImageSection = new ImageSection(_topicId: topicId, _infoPage: this);
                 }
                 return _activeImageSection;
             }
@@ -106,7 +106,7 @@ namespace Info_G
                     if (!row.IsNull("Image"))
                     {
                         int imageId = (int)row["Id"];
-                        ImageSection imSection = new(topicId: topicId, infoPage: this);
+                        ImageSection imSection = new(_topicId: topicId, _infoPage: this);
                         imSection.sectionId = imageId;
                         imSection.SetSavedImageShowing();
 
@@ -142,10 +142,18 @@ namespace Info_G
                         textBlock.Margin = new Thickness(20, 10, 0, 0);
                         textBlock.FontSize = 20;
                         textBlock.Text = row["Text"].ToString();
-                        grid.Margin = new Thickness(20, 50, 0, 0);
-                        grid.Children.Add(textBlock);
 
-                        Grid.SetColumn(textBlock, 0);
+                        Grid textGrid = new();
+                        textGrid.Background = new SolidColorBrush(Colors.AliceBlue);
+                        textGrid.Margin = new Thickness(20, 0, 0, 10);
+                        textGrid.MinWidth = textBlock.Width;
+
+
+                        grid.Margin = new Thickness(20, 50, 0, 0);
+                        grid.Children.Add(textGrid);
+                        textGrid.Children.Add(textBlock);
+
+                        Grid.SetColumn(textGrid, 0);
 
                         dropdownTopic = SetDropdown(40, 20);
 
@@ -264,8 +272,7 @@ namespace Info_G
 
         private void OnAddPhoto_click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"{topicId}");
-            ImageSection imageSection = new ImageSection(topicId, this);
+            ImageSection imageSection = new ImageSection(_topicId:topicId, _infoPage:this, _panelLabel:new Label());
             imageSection.SetUpImageSection();
             ActiveImageSection = imageSection;      
             infoPanel.Children.Add(imageSection.grid);

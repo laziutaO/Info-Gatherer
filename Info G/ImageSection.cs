@@ -22,7 +22,11 @@ namespace Info_G
         public int sectionId { get; set; }  
         public Grid grid { get; set; }
 
-        public Grid imageGrid { get; set; }
+        private Grid imageGrid { get; set; }
+
+        private Grid textGrid { get; set; }
+
+        private Grid textBoxGrid { get; set; }
 
         public Image imageControl { get; set; }
 
@@ -32,12 +36,17 @@ namespace Info_G
 
         private InformationPage infoPage;
 
+        private Border imageBorder { get; set; }
+
+        private Label pasteLabel { get; set; }
+
         private string textToChange { get; set; } = String.Empty;
 
-        public ImageSection(int topicId, InformationPage infoPage)
+        public ImageSection(int _topicId, InformationPage _infoPage, Label _panelLabel = null)
         {
-            this.topicId = topicId;
-            this.infoPage = infoPage;
+            topicId = _topicId;
+            infoPage = _infoPage;
+            pasteLabel = _panelLabel;
         }
 
         public void SetUpImageSection()
@@ -55,12 +64,13 @@ namespace Info_G
         {
             grid = new();
             grid.Width = width;
-            if(creatingImage)
+            if (creatingImage)
                 grid.Height = height;
-            grid.Margin = new Thickness(0, 50, 0, 0);
+
+            grid.Margin = new Thickness(20, 50, 0, 0);
 
             RowDefinition rowDef1 = new RowDefinition();
-            rowDef1.Height = new GridLength(400); // Set the height to 120
+            rowDef1.Height = new GridLength(400); 
 
             RowDefinition rowDef2 = new RowDefinition();
             rowDef2.Height = new GridLength(50);
@@ -80,50 +90,104 @@ namespace Info_G
             grid.ColumnDefinitions.Add(columnDef2);
 
             grid.Background = new SolidColorBrush(Colors.Wheat);
-            grid.Children.Add(imageControl);
+
+            SetImageGrid();
+            imageGrid.Children.Add(imageControl);
+
+            if(!creatingImage )
+                imageGrid.Children.Remove(pasteLabel);
+            
             Grid.SetColumn(imageControl, 0);
             Grid.SetRow(imageControl, 0);
+            
+        }
+
+        private void SetImageGrid()
+        {
+            //set up image grid
+            imageBorder = new();
+            imageBorder.Visibility = Visibility.Visible;
+            imageBorder.BorderBrush = new SolidColorBrush(Colors.Black);
+            imageGrid = new Grid();
+            
+            imageGrid.Margin = new Thickness(10, 10, 10, 10);
+            imageGrid.Height = 380;
+            imageGrid.Width = 720;
+            imageGrid.Background = new SolidColorBrush(Colors.AliceBlue);
+            imageBorder.Child = imageGrid;
+            grid.Children.Add(imageBorder);
+            Grid.SetColumn(imageControl, 0);
+            Grid.SetRow(imageControl, 0);
+
+            //set up message
+            if(pasteLabel != null)
+            {
+                pasteLabel.FontSize = 16;
+                pasteLabel.Content = "Paste image here";
+                pasteLabel.Margin = new Thickness(300, 200, 0, 0);
+                imageGrid.Children.Add(pasteLabel);
+            }
+            
         }
 
         private void SettingUpImage()
         {
             imageControl = new();
-            imageControl.Width = 800; 
-            imageControl.Height = 400; 
+            imageControl.Width = 700; 
+            imageControl.Height = 380; 
         }
 
         public void SetCaptionBox()
         {
-            captionBox = new RichTextBox();
+            textBoxGrid = new();
+            textBoxGrid.Background = new SolidColorBrush(Colors.AliceBlue);
+            textBoxGrid.Margin = new Thickness(20, 0, 0, 10);
+
+            Grid.SetRow(textBoxGrid, 2);
+            Grid.SetColumn(textBoxGrid, 0);
+
+            captionBox = new ();
+            captionBox.Width = 750;
+            captionBox.MinHeight = 400;
             captionBox.FontSize = 20;
             captionBox.Margin = new Thickness(20, 10, 0, 0);
-            grid.Children.Add(captionBox);
+            if(textGrid != null)
+                grid.Children.Remove(textGrid);
+            grid.Children.Add(textBoxGrid);
+            textBoxGrid.Children.Add(captionBox);
             grid.Margin = new Thickness(20, 50, 0, 0);
-
-            Grid.SetRow(captionBox, 2);
-            Grid.SetColumn(captionBox, 0);
+            textBoxGrid.MinWidth = captionBox.Width;
         }
 
         public void SetCaptionBlock(string text)
         {
+            textGrid = new();
+            textGrid.Background = new SolidColorBrush(Colors.AliceBlue);
+            textGrid.Margin = new Thickness(20, 0, 0, 10);
+            
+            Grid.SetRow(textGrid, 2);
+            Grid.SetColumn(textGrid, 0);
+
             captionBlock = new();
+            captionBlock.Width = 750;
             captionBlock.Text = text;
             captionBlock.FontSize = 20;
             captionBlock.Margin = new Thickness(20, 10, 0, 0);
-            grid.Children.Add(captionBlock);
+            if(textBoxGrid != null)
+                grid.Children.Remove(textBoxGrid);
+            grid.Children.Add(textGrid);
+            textGrid.Children.Add(captionBlock);
             grid.Margin = new Thickness(20, 50, 0, 0);
+            textGrid.MinWidth = captionBlock.Width;
 
-            Grid.SetRow(captionBlock, 2);
-            Grid.SetColumn(captionBlock, 0);
-            
         }
 
         public void SpawnSaveAndCaptionButtons()
         {
             if (grid == null) return;
 
-            Button add_caption = new Button();
-            add_caption.Width = 120;
+            Button add_caption = new ();
+            add_caption.Width = 150;
             add_caption.Height = 50;
             add_caption.Content = "Add Caption";
             add_caption.FontSize = 20;
@@ -131,8 +195,8 @@ namespace Info_G
             add_caption.Background = new SolidColorBrush(Colors.Crimson);
             add_caption.Click += OnAddCaption_click;
 
-            Button save = new Button();
-            save.Width = 120;
+            Button save = new ();
+            save.Width = 150;
             save.Height = 50;
             save.Content = "Save";
             save.FontSize = 20;
@@ -140,8 +204,8 @@ namespace Info_G
             save.Background = new SolidColorBrush(Colors.Crimson);
             save.Click += OnSave_click;
 
-            Button remove_image = new Button();
-            remove_image.Width = 120;
+            Button remove_image = new ();
+            remove_image.Width = 150;
             remove_image.Height = 50;
             remove_image.FontWeight = FontWeights.Bold;
             remove_image.FontSize = 20;
@@ -174,7 +238,7 @@ namespace Info_G
         {
             StackPanel stackpanel = new();
 
-            Button editButton = new Button();
+            Button editButton = new ();
             editButton.Content = "Edit caption";
             // Adjust the padding value to reduce the gap
             editButton.Padding = new Thickness(1); 
@@ -186,7 +250,7 @@ namespace Info_G
             editButton.Height = 50;
             editButton.Click += OnEdit_click;
 
-            Button deleteSectionButton = new Button();
+            Button deleteSectionButton = new ();
             deleteSectionButton.Content = "Delete section";
             // Adjust the padding value to reduce the gap
             deleteSectionButton.Padding = new Thickness(1); 
