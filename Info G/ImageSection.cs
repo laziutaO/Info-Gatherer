@@ -76,6 +76,7 @@ namespace Info_G
             rowDef2.Height = new GridLength(50);
 
             RowDefinition rowDef3 = new RowDefinition();
+            rowDef3.Height = GridLength.Auto;
 
             ColumnDefinition columnDef1 = new ColumnDefinition();
             columnDef1.Width = new GridLength(800);
@@ -277,23 +278,32 @@ namespace Info_G
         {
             //editing logic
             infoPage.activeDropdown.IsOpen = false;
-
+            bool removeGrid = false;
             foreach (UIElement element in grid.Children)
             {
-                if (element is TextBlock textBlock)
+                if(element is Grid captionGrid)
                 {
-                    textToChange = textBlock.Text;
-                    grid.Children.Remove(textBlock);
-                    break;
+                    foreach (UIElement element2 in captionGrid.Children)
+                    {
+                        if (element2 is TextBlock textBlock)
+                        {
+                            textToChange = textBlock.Text;
+                            removeGrid = true;  
+                            //grid.Children.Remove(captionBlock);
+                            break;
+                        }
+                    }
                 }
             }
-
+            if ( removeGrid )
+                grid.Children.Remove(textGrid); 
             captionBox = new();
             captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
             captionBox.FontSize = 20;
+            captionBox.Height = 400;
             grid.Children.Add(captionBox);
             Grid.SetColumn(captionBox, 0);
-            Grid.SetRow(captionBox, 1);
+            Grid.SetRow(captionBox, 2);
 
             Button save = new Button();
             save.Width = 120;

@@ -223,11 +223,18 @@ namespace Info_G
 
             foreach (UIElement element in grid.Children)
             {
-                if (element is TextBlock textBlock)
+                if (element is Grid textGrid)
                 {
-                    textToChange = textBlock.Text;
-                    activeGrid.Children.Remove(textBlock);
-                    break; 
+                    foreach (UIElement element2 in textGrid.Children)
+                    {
+                        if (element2 is TextBlock textBlock)
+                        {
+                            textToChange = textBlock.Text;
+                            activeGrid.Children.Remove(textBlock);
+                            break;
+                        }
+                    }
+                    
                 }
             }
             RichTextBox newTextBox = new();
