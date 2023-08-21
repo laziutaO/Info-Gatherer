@@ -20,15 +20,19 @@ namespace Info_G
     public partial class DeleteWindow : Window
     {
         MenuPage mainWindow;
-        public DeleteWindow(MenuPage _mainWindow)
+
+        int topic_Id;
+        public DeleteWindow(MenuPage _mainWindow, int _topic_Id)
         {
             InitializeComponent();
             mainWindow = _mainWindow;
+            topic_Id = _topic_Id;
         }
 
         private void OnDelete_click(object sender, RoutedEventArgs e)
         {
-            string _delete_topic_query = $"DELETE FROM Topic WHERE Name = '{mainWindow.oldNameTopic}';";
+            string _delete_topic_query = $"DELETE FROM Information WHERE Topic_Id = {topic_Id};" +
+                $"DELETE FROM Topic WHERE Id = {topic_Id};";
             DbExecution.ExecuteQuery(_delete_topic_query);
             mainWindow.DisplayTopics();
             this.Close();

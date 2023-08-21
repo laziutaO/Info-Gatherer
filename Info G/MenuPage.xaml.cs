@@ -51,7 +51,8 @@ namespace Info_G
 
         private void OnDelete_click(object sender, RoutedEventArgs e)
         {
-            deleteWindow = new DeleteWindow(this);
+            int topic_id = Get_TopicId();
+            deleteWindow = new DeleteWindow(this, topic_id);
             deleteWindow.Show();
         }
         private void CanvasMouseEnter(object sender, MouseEventArgs e)
