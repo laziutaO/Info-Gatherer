@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Info_G"
         mc:Ignorable="d"
         Title="" Height="170" Width="270"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         Background="Bisque"
         ResizeMode="NoResize">
     <Grid>

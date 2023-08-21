@@ -93,6 +93,7 @@ namespace Info_G
                     Canvas button_canvas = new Canvas();
                     button_canvas.Height = 170;
                     button_canvas.Width = 220;
+                    button_canvas.Margin = new Thickness(20, 10, 10, 10);
                     button_canvas.Background = new SolidColorBrush(Colors.Transparent);
                     button_canvas.MouseEnter += CanvasMouseEnter;
                     menuPanel.Children.Add(button_canvas);

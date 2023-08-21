@@ -9,6 +9,8 @@
         Title="Menu" 
         Height="600" 
         Width="1200"
+        MaxWidth="1400"  
+        MaxHeight="800"
         WindowStartupLocation="CenterScreen"
         
         Background="Transparent"

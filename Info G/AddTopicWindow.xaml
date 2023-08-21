@@ -6,9 +6,21 @@
         xmlns:local="clr-namespace:Info_G"
         mc:Ignorable="d"
         Title="" Height="250" Width="300"
-        WindowStartupLocation="CenterOwner"
+        WindowStartupLocation="CenterScreen"
         Background="Bisque"
         ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Crimson" />
+            <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Border
             x:Name="CreatePanel"

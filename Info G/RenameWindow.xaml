@@ -5,19 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Info_G"
         mc:Ignorable="d"
-        Title="" Height="250" Width="420"
-        WindowStartupLocation="CenterOwner"
+        Title="" Height="250" Width="350"
+        WindowStartupLocation="CenterScreen"
         Background="Bisque"
         ResizeMode="NoResize"
         >
-    
-    <Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="Crimson" />
+            <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="0,0,4,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110">
+            <ColumnDefinition Width="100">
             </ColumnDefinition>
-            <ColumnDefinition Width="180">
+            <ColumnDefinition Width="150">
             </ColumnDefinition>
-            <ColumnDefinition Width="110">
+            <ColumnDefinition Width="100">
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -31,8 +40,7 @@
             Grid.Row="1" 
             FontWeight="Bold" 
             FontSize="13" 
-            Content="NEW NAME OF THE TOPIC:">
-        </Label>
+            Content="NEW NAME:" Margin="29,0,35,0"/>
         <TextBox 
             x:Name="Rename_textbox"
             Grid.Column="1" 
@@ -51,10 +59,10 @@
             FontSize="20" 
             Background="Crimson" 
             BorderBrush="Black"
-            Click="OnSave_Rename_click">SAVE
+            Click="OnSave_Rename_click" Grid.ColumnSpan="2" Margin="40,29,110,61">SAVE
         </Button>
         <Button 
-            Grid.Column="2" 
+            Grid.Column="1" 
             Grid.Row ="3" 
             Width="100" 
             Height="60" 
@@ -62,7 +70,7 @@
             FontSize="20" 
             Background="Crimson"
             BorderBrush="Black"
-            Click="OnBack_Window_click">BACK
+            Click="OnBack_Window_click" Grid.ColumnSpan="2" Margin="111,29,39,61">BACK
         </Button>
     </Grid>
 </Window>

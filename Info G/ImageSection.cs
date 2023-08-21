@@ -24,10 +24,6 @@ namespace Info_G
 
         private Grid imageGrid { get; set; }
 
-        private Grid textGrid { get; set; }
-
-        private Grid textBoxGrid { get; set; }
-
         public Image imageControl { get; set; }
 
         public RichTextBox captionBox { get; set; }
@@ -64,8 +60,6 @@ namespace Info_G
         {
             grid = new();
             grid.Width = width;
-            if (creatingImage)
-                grid.Height = height;
 
             grid.Margin = new Thickness(20, 50, 0, 0);
 
@@ -114,7 +108,7 @@ namespace Info_G
             imageGrid.Margin = new Thickness(10, 10, 10, 10);
             imageGrid.Height = 380;
             imageGrid.Width = 720;
-            imageGrid.Background = new SolidColorBrush(Colors.AliceBlue);
+            imageGrid.Background = new SolidColorBrush(Colors.White);
             imageBorder.Child = imageGrid;
             grid.Children.Add(imageBorder);
             Grid.SetColumn(imageControl, 0);
@@ -138,48 +132,30 @@ namespace Info_G
             imageControl.Height = 380; 
         }
 
-        public void SetCaptionBox()
+        public void SetCaptionBox(bool edit = false)
         {
-            textBoxGrid = new();
-            textBoxGrid.Background = new SolidColorBrush(Colors.AliceBlue);
-            textBoxGrid.Margin = new Thickness(20, 0, 0, 10);
+            captionBox = new();
+            if(edit) 
+                captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
 
-            Grid.SetRow(textBoxGrid, 2);
-            Grid.SetColumn(textBoxGrid, 0);
-
-            captionBox = new ();
-            captionBox.Width = 750;
-            captionBox.MinHeight = 400;
             captionBox.FontSize = 20;
-            captionBox.Margin = new Thickness(20, 10, 0, 0);
-            if(textGrid != null)
-                grid.Children.Remove(textGrid);
-            grid.Children.Add(textBoxGrid);
-            textBoxGrid.Children.Add(captionBox);
-            grid.Margin = new Thickness(20, 50, 0, 0);
-            textBoxGrid.MinWidth = captionBox.Width;
+            captionBox.Height = 400;
+            grid.Children.Add(captionBox);
+            Grid.SetColumn(captionBox, 0);
+            Grid.SetRow(captionBox, 2);
         }
 
         public void SetCaptionBlock(string text)
         {
-            textGrid = new();
-            textGrid.Background = new SolidColorBrush(Colors.AliceBlue);
-            textGrid.Margin = new Thickness(20, 0, 0, 10);
-            
-            Grid.SetRow(textGrid, 2);
-            Grid.SetColumn(textGrid, 0);
-
             captionBlock = new();
             captionBlock.Width = 750;
             captionBlock.Text = text;
             captionBlock.FontSize = 20;
-            captionBlock.Margin = new Thickness(20, 10, 0, 0);
-            if(textBoxGrid != null)
-                grid.Children.Remove(textBoxGrid);
-            grid.Children.Add(textGrid);
-            textGrid.Children.Add(captionBlock);
+            captionBlock.Margin = new Thickness(20, 10, 10, 20);
+            grid.Children.Add(captionBlock);
+            Grid.SetRow(captionBlock, 2);
+            Grid.SetColumn(captionBlock, 0);
             grid.Margin = new Thickness(20, 50, 0, 0);
-            textGrid.MinWidth = captionBlock.Width;
 
         }
 
@@ -295,15 +271,7 @@ namespace Info_G
                     }
                 }
             }
-            if ( removeGrid )
-                grid.Children.Remove(textGrid); 
-            captionBox = new();
-            captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
-            captionBox.FontSize = 20;
-            captionBox.Height = 400;
-            grid.Children.Add(captionBox);
-            Grid.SetColumn(captionBox, 0);
-            Grid.SetRow(captionBox, 2);
+            SetCaptionBox(edit: true);
 
             Button save = new Button();
             save.Width = 120;

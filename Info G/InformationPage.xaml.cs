@@ -8,6 +8,7 @@ using System.Linq;
 using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -124,9 +125,11 @@ namespace Info_G
                     {
                         grid = new();
                         grid.Width = 1100;
-                        grid.Background = new SolidColorBrush(Colors.Beige);
+                        grid.Background = new SolidColorBrush(Colors.Wheat);
                         grid.Margin = new Thickness(0, 50, 0, 0);
                         grid.MouseEnter += Grid_MouseEnter;
+                        RowDefinition rowDef = new RowDefinition();
+                        rowDef.Height = GridLength.Auto;
 
                         ColumnDefinition columnDef1 = new ColumnDefinition();
                         columnDef1.Width = new GridLength(800);
@@ -138,22 +141,13 @@ namespace Info_G
                         infoPanel.Children.Add(grid);
 
                         TextBlock textBlock = new();
-                        textBlock.Width = 800;
-                        textBlock.Margin = new Thickness(20, 10, 0, 0);
+                        textBlock.Width = 750;
+                        textBlock.Margin = new Thickness(20, 10, 10, 20);
                         textBlock.FontSize = 20;
                         textBlock.Text = row["Text"].ToString();
 
-                        Grid textGrid = new();
-                        textGrid.Background = new SolidColorBrush(Colors.AliceBlue);
-                        textGrid.Margin = new Thickness(20, 0, 0, 10);
-                        textGrid.MinWidth = textBlock.Width;
-
-
                         grid.Margin = new Thickness(20, 50, 0, 0);
-                        grid.Children.Add(textGrid);
-                        textGrid.Children.Add(textBlock);
-
-                        Grid.SetColumn(textGrid, 0);
+                        grid.Children.Add(textBlock);
 
                         dropdownTopic = SetDropdown(40, 20);
 
