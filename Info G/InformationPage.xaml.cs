@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Info_G
 {
@@ -60,11 +61,13 @@ namespace Info_G
         public InformationPage(int topic_id)
         {
             InitializeComponent();
+            //setting topic id for queries and desplaying text and image segments
             topicId = topic_id;
             DisplayText();
         }
         private void Grid_MouseEnter(object sender, MouseEventArgs e)
         {
+            //setting active texblock and textbox for future manipulations
             if (sender is Grid grid)
             {
                 this.grid = grid;
@@ -73,8 +76,7 @@ namespace Info_G
                 {
                     if (element is RichTextBox textBox)
                     {
-                        activeTextBox = textBox;
-                        
+                        activeTextBox = textBox; 
                     }
                     else if (element is TextBlock textBlock)
                     {
@@ -97,8 +99,9 @@ namespace Info_G
         {
             try
             {
+                //retrieving datatable from database
                 DataTable dt = DbExecution.ReadRows(topicId);
-
+                // displaing saved image and text segments
                 foreach (DataRow row in dt.Rows)
                 {
                     DropdownTopic dropdownTopic = SetDropdown(40, 20);
@@ -106,6 +109,7 @@ namespace Info_G
                     string text = row["Text"].ToString();
                     if (!row.IsNull("Image"))
                     {
+                        //setting image section
                         int imageId = (int)row["Id"];
                         ImageSection imSection = new(_topicId: topicId, _infoPage: this);
                         imSection.sectionId = imageId;
@@ -123,6 +127,8 @@ namespace Info_G
 
                     else
                     {
+                        // if segment doesnt contain image than it is text segment
+                        //setting up grid
                         grid = new();
                         grid.Width = 1100;
                         grid.Background = new SolidColorBrush(Colors.Wheat);
@@ -139,7 +145,7 @@ namespace Info_G
                         grid.ColumnDefinitions.Add(columnDef1);
                         grid.ColumnDefinitions.Add(columnDef2);
                         infoPanel.Children.Add(grid);
-
+                        //setting up text block
                         TextBlock textBlock = new();
                         textBlock.Width = 750;
                         textBlock.Margin = new Thickness(20, 10, 10, 20);
@@ -169,7 +175,7 @@ namespace Info_G
         }
         private void SetEditButton(ref DropdownTopic dropdown)
         {
-            
+            //setting up dropdown for text segment
             StackPanel stackpanel = new();
 
             Button editButton = new Button();
@@ -202,6 +208,7 @@ namespace Info_G
 
         private void OnDelete_click(object sender, RoutedEventArgs e)
         {
+            //deleting text segment
             activeDropdown.IsOpen = false;
             string activeText = activeTextBlock.Text;
             string _delete_text_query = $"DELETE FROM Information WHERE Text = '{activeText}' AND Topic_Id = {topicId};";
@@ -217,18 +224,11 @@ namespace Info_G
 
             foreach (UIElement element in grid.Children)
             {
-                if (element is Grid textGrid)
+                if (element is TextBlock textBlock)
                 {
-                    foreach (UIElement element2 in textGrid.Children)
-                    {
-                        if (element2 is TextBlock textBlock)
-                        {
-                            textToChange = textBlock.Text;
-                            activeGrid.Children.Remove(textBlock);
-                            break;
-                        }
-                    }
-                    
+                    textToChange = textBlock.Text;
+                    activeGrid.Children.Remove(textBlock);
+                    break;
                 }
             }
             RichTextBox newTextBox = new();
@@ -358,6 +358,7 @@ namespace Info_G
 
         private void InformationPage_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            //retrieving image from clipboard to image segment
             if (ActiveImageSection.imageControl != null && Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
                 if (e.Key == Key.V)

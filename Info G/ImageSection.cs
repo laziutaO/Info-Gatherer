@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
 
 namespace Info_G
@@ -47,11 +48,13 @@ namespace Info_G
 
         public void SetUpImageSection()
         {
+            //when creating new image section
             SettingUpImage();
             SettingUpGrid();
         }
         public void SetSavedImageShowing()
         {
+            //displaying saved image section
             SettingUpImage();
             SettingUpGrid(creatingImage: false);
             
@@ -135,6 +138,7 @@ namespace Info_G
         public void SetCaptionBox(bool edit = false)
         {
             captionBox = new();
+            //if editing caption than display old caption text in caption
             if(edit) 
                 captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
 
@@ -161,6 +165,8 @@ namespace Info_G
 
         public void SpawnSaveAndCaptionButtons()
         {
+            //being called when retrieved image from clipboard to section
+            //setting up different options
             if (grid == null) return;
 
             Button add_caption = new ();
@@ -254,21 +260,12 @@ namespace Info_G
         {
             //editing logic
             infoPage.activeDropdown.IsOpen = false;
-            bool removeGrid = false;
             foreach (UIElement element in grid.Children)
             {
-                if(element is Grid captionGrid)
+                if (element is TextBlock textBlock)
                 {
-                    foreach (UIElement element2 in captionGrid.Children)
-                    {
-                        if (element2 is TextBlock textBlock)
-                        {
-                            textToChange = textBlock.Text;
-                            removeGrid = true;  
-                            //grid.Children.Remove(captionBlock);
-                            break;
-                        }
-                    }
+                    textToChange = textBlock.Text;
+                    break;
                 }
             }
             SetCaptionBox(edit: true);
@@ -325,6 +322,7 @@ namespace Info_G
 
         private string GetCaptionText()
         {
+            //if caption doesnt contain text than return null else returt text from caption box
             return captionBox == null ? null : new TextRange(captionBox.Document.ContentStart, captionBox.Document.ContentEnd).Text;
         }
 

@@ -56,6 +56,7 @@ namespace Info_G
         }
         private void CanvasMouseEnter(object sender, MouseEventArgs e)
         {
+            // Get old name of topic 
             if (sender is Canvas canvas)
             {
                 foreach (UIElement element in canvas.Children)
@@ -88,8 +89,10 @@ namespace Info_G
             menuPanel.Children.Clear();
             try
             {
+                //Get names of topics from database and create button for each topic
                 foreach (string name in DbExecution.ReadNames(DbExecution.read_names))
                 {
+                    //set canvas for containing button
                     Canvas button_canvas = new Canvas();
                     button_canvas.Height = 170;
                     button_canvas.Width = 220;
@@ -98,17 +101,19 @@ namespace Info_G
                     button_canvas.MouseEnter += CanvasMouseEnter;
                     menuPanel.Children.Add(button_canvas);
 
+                    //set actual button
                     Button butt = new();
                     butt.Height = 150;
                     butt.Width = 200;
                     butt.Content = name;
+                    
                     AdaptContentSize(name, ref butt);
                     butt.Background = new SolidColorBrush(Colors.Crimson);
                     butt.Foreground = new SolidColorBrush(Colors.Black);
                     button_canvas.Children.Add(butt);
                     butt.Margin = new Thickness(0, 10, 0, 20);
                     butt.Click += Topic_open_click;
-
+                    //set dropdown options fore each topic
                     DropdownTopic dropdownTopic = new DropdownTopic();
                     dropdownTopic.Height = 20;
                     dropdownTopic.Width = 14;
@@ -127,8 +132,9 @@ namespace Info_G
 
         private void SetEditButton(ref DropdownTopic dropdown, string curNameTopic)
         {
+            //settting dropdown options
             StackPanel stackpanel = new();
-
+            //button for renaming topic
             Button renameButton = new Button();
             renameButton.Content = "Rename";
             renameButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
@@ -136,7 +142,7 @@ namespace Info_G
             renameButton.FontWeight = FontWeights.Light;
             renameButton.Width = 150;
             renameButton.Click += OnRename_click;
-
+            //button for deleting topic
             Button deleteButton = new Button();
             deleteButton.Content = "Delete";
             deleteButton.Padding = new Thickness(1); // Adjust the padding value to reduce the gap
@@ -152,6 +158,7 @@ namespace Info_G
 
         private void AdaptContentSize(string content, ref Button butt)
         {
+            //method for adjusting font size according to text length
             if (content.Length > 22)
                 butt.FontSize = 12;
             else if (content.Length > 16)

@@ -16,8 +16,6 @@
         Background="Transparent"
         AllowsTransparency="False">
 
-
-
     <Grid Background="White">
         <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
