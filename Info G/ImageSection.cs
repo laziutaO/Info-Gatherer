@@ -141,9 +141,9 @@ namespace Info_G
             //if editing caption than display old caption text in caption
             if(edit) 
                 captionBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
-
             captionBox.FontSize = 20;
             captionBox.Height = 400;
+            captionBox.Width = 750;
             grid.Children.Add(captionBox);
             Grid.SetColumn(captionBox, 0);
             Grid.SetRow(captionBox, 2);
@@ -152,6 +152,7 @@ namespace Info_G
         public void SetCaptionBlock(string text)
         {
             captionBlock = new();
+            captionBlock.TextWrapping = TextWrapping.Wrap;
             captionBlock.Width = 750;
             captionBlock.Text = text;
             captionBlock.FontSize = 20;

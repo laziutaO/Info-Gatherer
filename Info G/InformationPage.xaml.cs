@@ -147,6 +147,7 @@ namespace Info_G
                         infoPanel.Children.Add(grid);
                         //setting up text block
                         TextBlock textBlock = new();
+                        textBlock.TextWrapping = TextWrapping.Wrap;
                         textBlock.Width = 750;
                         textBlock.Margin = new Thickness(20, 10, 10, 20);
                         textBlock.FontSize = 20;
@@ -234,6 +235,7 @@ namespace Info_G
             RichTextBox newTextBox = new();
             newTextBox.Document.Blocks.Add(new Paragraph(new Run(textToChange)));
             newTextBox.FontSize = 20;
+            newTextBox.Width = 750;
             grid.Children.Add(newTextBox);
             Grid.SetColumn(newTextBox, 0);
             activeTextBox = newTextBox;
@@ -319,6 +321,7 @@ namespace Info_G
             infoPanel.Children.Add(grid);
 
             RichTextBox textBox = new RichTextBox();
+            textBox.Width = 750;
             textBox.FontSize = 20;
             grid.Children.Add(textBox);
             Grid.SetColumn(textBox, 0);
